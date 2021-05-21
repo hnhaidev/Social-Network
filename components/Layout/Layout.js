@@ -6,6 +6,7 @@ import nprogress from "nprogress";
 import Router from "next/router";
 
 function Layout({ children }) {
+  // Tao thanh tien trinh voi nprogress
   Router.onRouteChangeStart = () => nprogress.start();
   Router.onRouteChangeComplete = () => nprogress.done();
   Router.onRouteChangeError = () => nprogress.done();

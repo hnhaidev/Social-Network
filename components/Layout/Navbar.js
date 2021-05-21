@@ -6,6 +6,7 @@ import Link from "next/link";
 function Navbar() {
   const router = useRouter();
 
+  // kiem tra route : tra ve boolean
   const isActive = (route) => router.pathname === route;
 
   return (
