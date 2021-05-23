@@ -6,7 +6,12 @@ import {
   HeaderMessage,
   FooterMessage,
 } from "../components/Common/WelcomeMessage";
+import axios from "axios";
+import baseUrl from "../utils/baseUrl";
+import { registerUser } from "../utils/authUser";
+import uploadPic from "../utils/uploadPicToCloudinary";
 const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+let cancel;
 
 function Signup() {
   const [user, setUser] = useState({
@@ -55,8 +60,51 @@ function Signup() {
     isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
   }, [user]);
 
-  const handleSubmit = (e) => {
+  const checkUsername = async () => {
+    setUsernameLoading(true);
+    try {
+      cancel && cancel();
+
+      const CancelToken = axios.CancelToken;
+
+      const res = await axios.get(`${baseUrl}/api/signup/${username}`, {
+        cancelToken: new CancelToken((canceler) => {
+          cancel = canceler;
+        }),
+      });
+
+      if (errorMsg !== null) setErrorMsg(null);
+
+      if (res.data === "Available") {
+        setUsernameAvailable(true);
+        setUser((prev) => ({ ...prev, username }));
+      }
+    } catch (error) {
+      setErrorMsg("Username Not Available");
+      setUsernameAvailable(false);
+    }
+    setUsernameLoading(false);
+  };
+
+  useEffect(() => {
+    username === "" ? setUsernameAvailable(false) : checkUsername();
+  }, [username]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormLoading(true);
+
+    let profilePicUrl;
+    if (media !== null) {
+      profilePicUrl = await uploadPic(media);
+    }
+
+    if (media !== null && !profilePicUrl) {
+      setFormLoading(false);
+      return setErrorMsg("Error Uploading Image");
+    }
+
+    await registerUser(user, profilePicUrl, setErrorMsg, setFormLoading);
   };
 
   return (
