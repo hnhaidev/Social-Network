@@ -15,11 +15,11 @@ function CommonInputs({
         name="bio"
         value={bio}
         onChange={handleChange}
-        placeholder="bio"
+        placeholder="Thông tin về bạn"
       />
 
       <Button
-        content="Add Social Links"
+        content="Thêm liên kết"
         color="red"
         icon="at"
         type="button"
@@ -65,7 +65,7 @@ function CommonInputs({
             icon="attention"
             info
             size="small"
-            header="Social Media Links Are Optional!"
+            header="Liên kết mạng xã hội là tùy chọn!"
           />
         </>
       )}

@@ -23,7 +23,7 @@ function SideMenu({
           <List.Item active={isActive("/")}>
             <Icon name="home" size="large" color={isActive("/") && "teal"} />
             <List.Content>
-              <List.Header content="Home" />
+              <List.Header content="Trang chủ" />
             </List.Content>
           </List.Item>
         </Link>
@@ -39,7 +39,7 @@ function SideMenu({
               }
             />
             <List.Content>
-              <List.Header content="Messages" />
+              <List.Header content="Trò chuyện" />
             </List.Content>
           </List.Item>
         </Link>
@@ -56,7 +56,7 @@ function SideMenu({
               }
             />
             <List.Content>
-              <List.Header content="Notifications" />
+              <List.Header content="Thông báo" />
             </List.Content>
           </List.Item>
         </Link>
@@ -70,7 +70,7 @@ function SideMenu({
               color={router.query.username === username && "teal"}
             />
             <List.Content>
-              <List.Header content="Account" />
+              <List.Header content="Tài khoản" />
             </List.Content>
           </List.Item>
         </Link>
@@ -79,7 +79,7 @@ function SideMenu({
         <List.Item onClick={() => logoutUser(email)}>
           <Icon name="log out" size="large" />
           <List.Content>
-            <List.Header content="Logout" />
+            <List.Header content="Đăng xuất" />
           </List.Content>
         </List.Item>
       </List>

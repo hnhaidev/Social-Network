@@ -54,7 +54,7 @@ function ImageDropDiv({
                       style={{ cursor: "pointer" }}
                       onClick={() => inputRef.current.click()}
                     />
-                    Drag n Drop or Click To Upload Image
+                    Kéo và thả hoặc nhấp để tải hình ảnh lên
                   </Header>
                 </Segment>
               </>

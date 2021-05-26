@@ -74,7 +74,7 @@ function Login() {
           />
 
           <Form.Input
-            label="Password"
+            label="Mật khẩu"
             placeholder="Password"
             name="password"
             value={password}
@@ -94,7 +94,7 @@ function Login() {
           <Divider hidden />
           <Button
             icon="signup"
-            content="Login"
+            content="Đăng nhập"
             type="submit"
             color="orange"
             disabled={submitDisabled}

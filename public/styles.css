@@ -37,3 +37,7 @@ body {
   margin: 0;
   padding: 0.5em 1em 0.75em !important;
 }
+
+.ui.big.list {
+  font-size: 1em !important;
+}

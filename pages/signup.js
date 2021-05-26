@@ -80,7 +80,7 @@ function Signup() {
         setUser((prev) => ({ ...prev, username }));
       }
     } catch (error) {
-      setErrorMsg("Username Not Available");
+      setErrorMsg("Tên người dùng không khả dụng");
       setUsernameAvailable(false);
     }
     setUsernameLoading(false);
@@ -101,7 +101,7 @@ function Signup() {
 
     if (media !== null && !profilePicUrl) {
       setFormLoading(false);
-      return setErrorMsg("Error Uploading Image");
+      return setErrorMsg("Lỗi gửi hình ảnh");
     }
 
     await registerUser(user, profilePicUrl, setErrorMsg, setFormLoading);
@@ -134,7 +134,7 @@ function Signup() {
           />
           <Form.Input
             required
-            label="Name"
+            label="Họ và Tên"
             placeholder="Name"
             name="name"
             value={name}
@@ -158,7 +158,7 @@ function Signup() {
           />
 
           <Form.Input
-            label="Password"
+            label="Mật khẩu"
             placeholder="Password"
             name="password"
             value={password}
@@ -179,7 +179,7 @@ function Signup() {
             loading={usernameLoading}
             error={!usernameAvailable}
             required
-            label="Username"
+            label="Tên tài khoản"
             placeholder="Username"
             value={username}
             onChange={(e) => {
@@ -205,7 +205,7 @@ function Signup() {
           <Divider hidden />
           <Button
             icon="signup"
-            content="Signup"
+            content="Đăng ký"
             type="submit"
             color="orange"
             disabled={submitDisabled || !usernameAvailable}
