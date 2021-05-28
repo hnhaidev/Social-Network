@@ -71,8 +71,12 @@ const ResultRenderer = ({ _id, profilePicUrl, name }) => {
   return (
     <List key={_id}>
       <List.Item>
-        <Image src={profilePicUrl} alt="ProfilePic" avatar />
         <List.Content header={name} as="a" />
+        <Image
+          avatar
+          src={profilePicUrl}
+          style={{ borderRadius: "50% !important" }}
+        />
       </List.Item>
     </List>
   );

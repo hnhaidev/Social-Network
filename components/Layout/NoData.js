@@ -2,19 +2,37 @@ import { Message, Button } from "semantic-ui-react";
 
 export const NoProfilePosts = () => (
   <>
-    <Message info icon="meh" header="Sorry" content="User has not posted anything yet!" />
-    <Button icon="long arrow alternate left" content="Go Back" as="a" href="/" />
+    <Message
+      info
+      icon="meh"
+      header="Sorry"
+      content="Người dùng đã không đăng bất cứ điều gì được nêu ra!"
+    />
+    <Button
+      icon="long arrow alternate left"
+      content="Quay lại"
+      as="a"
+      href="/"
+    />
   </>
 );
 
 export const NoFollowData = ({ followersComponent, followingComponent }) => (
   <>
     {followersComponent && (
-      <Message icon="user outline" info content="User does not have followers" />
+      <Message
+        icon="user outline"
+        info
+        content="Người dùng không có người theo dõi "
+      />
     )}
 
     {followingComponent && (
-      <Message icon="user outline" info content="User does not follow any users" />
+      <Message
+        icon="user outline"
+        info
+        content="Người dùng không theo dõi bất kỳ người dùng nào"
+      />
     )}
   </>
 );
@@ -24,7 +42,7 @@ export const NoMessages = () => (
     info
     icon="telegram plane"
     header="Sorry"
-    content="You have not messaged anyone yet.Search above to message someone!"
+    content="Bạn chưa nhắn tin cho ai cả. Tìm kiếm ở trên để nhắn tin cho ai đó!"
   />
 );
 
@@ -33,10 +51,10 @@ export const NoPosts = () => (
     info
     icon="meh"
     header="Hey!"
-    content="No Posts. Make sure you have followed someone."
+    content="Không có bài đăng nào. Đảm bảo rằng bạn đã theo dõi ai đó."
   />
 );
 
 export const NoProfile = () => (
-  <Message info icon="meh" header="Hey!" content="No Profile Found." />
+  <Message info icon="meh" header="Hey!" content="Không tìm thấy hồ sơ." />
 );

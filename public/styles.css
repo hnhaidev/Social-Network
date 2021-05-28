@@ -3,7 +3,7 @@
 }
 
 body {
-  background: var(--bodyBg);
+  background: #fafafa !important;
 }
 
 .spanLikesList:hover {
@@ -40,4 +40,8 @@ body {
 
 .ui.big.list {
   font-size: 1em !important;
+}
+
+.ui.comments .comment .avatar img {
+  border-radius: 50% !important;
 }

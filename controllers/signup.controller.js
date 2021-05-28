@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const isEmail = require("validator/lib/isEmail");
 const userPng =
   "https://res.cloudinary.com/indersingh/image/upload/v1593464618/App/user_mklcpl.png";
+const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
 
 module.exports.signup = async (req, res) => {
   const { username } = req.params;
