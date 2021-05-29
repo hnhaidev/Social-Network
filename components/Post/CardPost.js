@@ -79,7 +79,7 @@ function CardPost({ post, user, setPosts, setShowToastr }) {
                   trigger={
                     <Image
                       src="/deleteIcon.svg"
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", width: "20px" }}
                       size="mini"
                       floated="right"
                     />

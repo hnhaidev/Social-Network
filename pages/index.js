@@ -22,7 +22,7 @@ function Index({ user, postsData, errorLoading }) {
   const [pageNumber, setPageNumber] = useState(2);
 
   useEffect(() => {
-    document.title = `Welcome, ${user.name.split(" ")[0]}`;
+    document.title = `Welcome, ${user.name.split(" ").pop()}`;
   }, []);
 
   useEffect(() => {
@@ -41,42 +41,36 @@ function Index({ user, postsData, errorLoading }) {
       setPosts((prev) => [...prev, ...res.data]);
       setPageNumber((prev) => prev + 1);
     } catch (error) {
-      alert("Error fetching Posts");
+      alert("Lỗi khi tìm nạp bài đăng !");
     }
   };
 
   return (
     <>
       <Segment basic>
-        <Grid>
-          <Grid.Column width={3}></Grid.Column>
-          <Grid.Column width={12}>
-            {showToastr && <PostDeleteToastr />}
-            <CreatePost user={user} setPosts={setPosts} />
-            {posts.length === 0 || errorLoading ? (
-              <NoPosts />
-            ) : (
-              <InfiniteScroll
-                hasMore={hasMore}
-                next={fetchDataOnScroll}
-                loader={<PlaceHolderPosts />}
-                endMessage={<EndMessage />}
-                dataLength={posts.length}
-              >
-                {posts.map((post) => (
-                  <CardPost
-                    key={post._id}
-                    post={post}
-                    user={user}
-                    setPosts={setPosts}
-                    setShowToastr={setShowToastr}
-                  />
-                ))}
-              </InfiniteScroll>
-            )}
-          </Grid.Column>
-          <Grid.Column width={3}></Grid.Column>
-        </Grid>
+        {showToastr && <PostDeleteToastr />}
+        <CreatePost user={user} setPosts={setPosts} />
+        {posts.length === 0 || errorLoading ? (
+          <NoPosts />
+        ) : (
+          <InfiniteScroll
+            hasMore={hasMore}
+            next={fetchDataOnScroll}
+            loader={<PlaceHolderPosts />}
+            endMessage={<EndMessage />}
+            dataLength={posts.length}
+          >
+            {posts.map((post) => (
+              <CardPost
+                key={post._id}
+                post={post}
+                user={user}
+                setPosts={setPosts}
+                setShowToastr={setShowToastr}
+              />
+            ))}
+          </InfiniteScroll>
+        )}
       </Segment>
     </>
   );

@@ -36,7 +36,13 @@ function Layout({ children, user }) {
               </Grid.Column>
 
               <Grid.Column width={10}>
-                <Visibility context={contextRef}>{children}</Visibility>
+                <Grid>
+                  <Grid.Column width={3}></Grid.Column>
+                  <Grid.Column width={12}>
+                    <Visibility context={contextRef}>{children}</Visibility>
+                  </Grid.Column>
+                  <Grid.Column width={3}></Grid.Column>
+                </Grid>
               </Grid.Column>
 
               <Grid.Column floated="left" width={4}>

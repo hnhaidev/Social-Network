@@ -33,26 +33,70 @@ module.exports.createPost = async (req, res) => {
 module.exports.getPost = async (req, res) => {
   const { pageNumber } = req.query;
 
-  const number = Number(pageNumber);
-  const size = 8;
-
   try {
-    let posts;
+    const number = Number(pageNumber);
+    const size = 8;
+    const { userId } = req;
+
+    const loggedUser = await FollowerModel.findOne({ user: userId }).select(
+      "-followers"
+    );
+
+    let posts = [];
 
     if (number === 1) {
-      posts = await PostModel.find()
-        .limit(size)
-        .sort({ createdAt: -1 })
-        .populate("user")
-        .populate("comments.user");
-    } else {
+      if (loggedUser.following.length > 0) {
+        posts = await PostModel.find({
+          user: {
+            $in: [
+              userId,
+              ...loggedUser.following.map((following) => following.user),
+            ],
+          },
+        })
+          .limit(size)
+          .sort({ createdAt: -1 })
+          .populate("user")
+          .populate("comments.user");
+      }
+      //
+      else {
+        posts = await PostModel.find({ user: userId })
+          .limit(size)
+          .sort({ createdAt: -1 })
+          .populate("user")
+          .populate("comments.user");
+      }
+    }
+
+    //
+    else {
       const skips = size * (number - 1);
-      posts = await PostModel.find()
-        .skip(skips)
-        .limit(size)
-        .sort({ createdAt: -1 })
-        .populate("user")
-        .populate("comments.user");
+
+      if (loggedUser.following.length > 0) {
+        posts = await PostModel.find({
+          user: {
+            $in: [
+              userId,
+              ...loggedUser.following.map((following) => following.user),
+            ],
+          },
+        })
+          .skip(skips)
+          .limit(size)
+          .sort({ createdAt: -1 })
+          .populate("user")
+          .populate("comments.user");
+      }
+      //
+      else {
+        posts = await PostModel.find({ user: userId })
+          .skip(skips)
+          .limit(size)
+          .sort({ createdAt: -1 })
+          .populate("user")
+          .populate("comments.user");
+      }
     }
 
     return res.json(posts);
