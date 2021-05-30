@@ -3,6 +3,10 @@ const PostModel = require("../models/PostModel");
 const FollowerModel = require("../models/FollowerModel");
 const ProfileModel = require("../models/ProfileModel");
 const bcrypt = require("bcryptjs");
+const {
+  newFollowerNotification,
+  removeFollowerNotification,
+} = require("../utilsServer/notificationActions");
 
 // GET PROFILE INFO
 module.exports.getProfile = async (req, res) => {
@@ -122,6 +126,8 @@ module.exports.postFollowAUser = async (req, res) => {
     await userToFollow.followers.unshift({ user: userId });
     await userToFollow.save();
 
+    await newFollowerNotification(userId, userToFollowId);
+
     return res.status(200).send("Đã cập nhật !");
   } catch (error) {
     console.error(error);
@@ -170,6 +176,8 @@ module.exports.putFollowAUser = async (req, res) => {
 
     await userToUnfollow.followers.splice(removeFollower, 1);
     await userToUnfollow.save();
+
+    await removeFollowerNotification(userId, userToUnfollowId);
 
     return res.status(200).send("Đã cập nhật !");
   } catch (error) {

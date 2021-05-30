@@ -2,6 +2,12 @@ const UserModel = require("../models/UserModel");
 const PostModel = require("../models/PostModel");
 const FollowerModel = require("../models/FollowerModel");
 const uuid = require("uuid").v4;
+const {
+  newLikeNotification,
+  removeLikeNotification,
+  newCommentNotification,
+  removeCommentNotification,
+} = require("../utilsServer/notificationActions");
 
 // CREATE A POST
 module.exports.createPost = async (req, res) => {
@@ -176,6 +182,10 @@ module.exports.likePost = async (req, res) => {
     await post.likes.unshift({ user: userId });
     await post.save();
 
+    if (post.user.toString() !== userId) {
+      await newLikeNotification(userId, postId, post.user.toString());
+    }
+
     return res.status(200).send("Đã thích bài viết !");
   } catch (error) {
     console.error(error);
@@ -209,6 +219,10 @@ module.exports.unlikePost = async (req, res) => {
 
     await post.save();
 
+    if (post.user.toString() !== userId) {
+      await removeLikeNotification(userId, postId, post.user.toString());
+    }
+
     return res.status(200).send("Không thích bài viết !");
   } catch (error) {
     console.error(error);
@@ -239,6 +253,7 @@ module.exports.createComment = async (req, res) => {
     const { postId } = req.params;
 
     const { text } = req.body;
+    const { userId } = req;
 
     if (text.length < 1)
       return res.status(401).send("Nhận xét chỉ nên có ít nhất 1 ký tự !");
@@ -250,12 +265,22 @@ module.exports.createComment = async (req, res) => {
     const newComment = {
       _id: uuid(),
       text,
-      user: req.userId,
+      user: userId,
       date: Date.now(),
     };
 
     await post.comments.unshift(newComment);
     await post.save();
+
+    if (post.user.toString() !== userId) {
+      await newCommentNotification(
+        postId,
+        newComment._id,
+        userId,
+        post.user.toString(),
+        text
+      );
+    }
 
     return res.status(200).json(newComment._id);
   } catch (error) {
@@ -288,6 +313,15 @@ module.exports.deleteComment = async (req, res) => {
       await post.comments.splice(indexOf, 1);
 
       await post.save();
+
+      if (post.user.toString() !== userId) {
+        await removeCommentNotification(
+          postId,
+          commentId,
+          userId,
+          post.user.toString()
+        );
+      }
 
       return res.status(200).send("Đã xoá thành công !");
     };
