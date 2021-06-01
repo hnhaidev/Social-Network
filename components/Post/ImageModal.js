@@ -66,13 +66,21 @@ function ImageModal({
                 trigger={
                   likes.length > 0 && (
                     <span className="spanLikesList">
-                      {`${likes.length} ${
-                        likes.length === 1 ? "like" : "likes"
-                      }`}
+                      {`${likes.length} lượt thích`}
                     </span>
                   )
                 }
               />
+
+              <Icon
+                name="comment alternate outline"
+                style={{ marginLeft: "15px" }}
+                color="blue"
+              />
+
+              {comments.length > 0 && (
+                <span>{`${comments.length} bình luận`}</span>
+              )}
 
               <Divider hidden />
 

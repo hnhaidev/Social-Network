@@ -7,19 +7,22 @@
   color: #fff;
 }
 .inlineContainer {
-  display: inline-flex;
+  display: flex;
+  align-items: center;
 }
 .inlineContainer.own {
   flex-direction: row-reverse;
 }
 .inlineIcon {
-  width: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   object-fit: contain;
 }
 .ownBubble {
   min-width: 60px;
   max-width: 700px;
-  padding: 14px 18px;
+  padding: 5px 10px;
   margin: 6px 8px;
   background-color: #5b5377;
   border-radius: 16px 16px 0 16px;
@@ -28,7 +31,7 @@
 .otherBubble {
   min-width: 60px;
   max-width: 700px;
-  padding: 14px 18px;
+  padding: 5px 10px;
   margin: 6px 8px;
   background-color: #6c8ea4;
   border-radius: 16px 16px 16px 0;
@@ -42,6 +45,6 @@
 }
 span.own,
 span.other {
-  font-size: 14px;
+  font-size: 12px;
   color: grey;
 }

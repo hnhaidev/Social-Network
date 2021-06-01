@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Form,
   Button,
@@ -6,7 +6,10 @@ import {
   Divider,
   Message,
   Icon,
-  Popup,
+  Segment,
+  Grid,
+  Modal,
+  Card,
 } from "semantic-ui-react";
 import uploadPic from "../../utils/uploadPicToCloudinary";
 import { submitNewPost } from "../../utils/postActions";
@@ -18,9 +21,13 @@ function CreatePost({ user, setPosts }) {
 
   const [error, setError] = useState(null);
   const [highlighted, setHighlighted] = useState(false);
+  const [hideImage, setHideImage] = useState(false);
+  const [showMap, setShowMap] = useState(false);
 
   const [media, setMedia] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -35,10 +42,10 @@ function CreatePost({ user, setPosts }) {
 
   const addStyles = () => ({
     textAlign: "center",
-    height: "150px",
-    width: "150px",
-    border: "dotted",
-    paddingTop: media === null && "60px",
+    textAlign: "center",
+    maxHeight: "20rem",
+    width: "100%",
+    overflow: "auto",
     cursor: "pointer",
     borderColor: highlighted ? "green" : "black",
   });
@@ -68,97 +75,181 @@ function CreatePost({ user, setPosts }) {
     setMedia(null);
     setMediaPreview(null);
     setLoading(false);
+    setShowModal(false);
+    setHideImage(false);
+    setShowMap(false);
   };
+
+  useEffect(() => {
+    if (media === null) {
+      setHideImage(false);
+    }
+  }, [media]);
 
   return (
     <>
-      <Form error={error !== null} onSubmit={handleSubmit}>
-        <Message
-          error
-          onDismiss={() => setError(null)}
-          content={error}
-          header="Oops!"
-        />
-
-        <Form.Group>
-          <Image src={user.profilePicUrl} circular avatar inline />
-          <Form.TextArea
-            placeholder="Bạn đang nghĩ gì thế ?"
-            name="text"
-            value={newPost.text}
-            onChange={handleChange}
-            rows={1}
-            width={14}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Input
-            value={newPost.location}
-            name="location"
-            onChange={handleChange}
-            label="Thêm vị trí"
-            icon="map marker alternate"
-            placeholder="Vị trí ?"
-          />
-
-          <input
-            ref={inputRef}
-            onChange={handleChange}
-            name="media"
-            style={{ display: "none" }}
-            type="file"
-            accept="image/*"
-          />
-        </Form.Group>
-
-        <div
-          onClick={() => inputRef.current.click()}
-          style={addStyles()}
-          onDrag={(e) => {
-            e.preventDefault();
-            setHighlighted(true);
+      <Segment>
+        <Grid>
+          <Grid.Column
+            width={1}
+            style={{ paddingRight: "0", paddingLeft: "0", marginLeft: "1rem" }}
+          >
+            <Image src={user.profilePicUrl} circular avatar inline />
+          </Grid.Column>
+          <Grid.Column width={14} style={{ paddingRight: "0.5rem" }}>
+            <Button fluid circular onClick={() => setShowModal(true)}>
+              Bạn đang nghĩ gì thế ?
+            </Button>
+          </Grid.Column>
+        </Grid>
+      </Segment>
+      {showModal && (
+        <Modal
+          open={showModal}
+          closeIcon
+          closeOnDimmerClick
+          onClose={() => {
+            setShowModal(false);
           }}
-          onDragLeave={(e) => {
-            e.preventDefault();
-            setHighlighted(false);
-          }}
-          onDrop={(e) => {
-            e.preventDefault();
-            setHighlighted(true);
-
-            const droppedFile = Array.from(e.dataTransfer.files);
-
-            setMedia(droppedFile[0]);
-            setMediaPreview(URL.createObjectURL(droppedFile[0]));
-          }}
+          size="tiny"
         >
-          {media === null ? (
-            <Icon name="plus" size="big" />
-          ) : (
-            <>
-              <Image
-                style={{ height: "150px", width: "150px" }}
-                src={mediaPreview}
-                alt="PostImage"
-                centered
-                size="medium"
+          <Modal.Content>
+            <Form error={error !== null} onSubmit={handleSubmit}>
+              <Message
+                error
+                onDismiss={() => setError(null)}
+                content={error}
+                header="Oops!"
               />
-            </>
-          )}
-        </div>
-        <Divider hidden />
 
-        <Button
-          circular
-          disabled={newPost.text === "" || loading}
-          content={<strong>Đăng</strong>}
-          style={{ backgroundColor: "#1DA1F2", color: "white" }}
-          icon="send"
-          loading={loading}
-        />
-      </Form>
-      <Divider />
+              <Form.Group style={{ textAlign: "center" }}>
+                <Image
+                  src={user.profilePicUrl}
+                  circular
+                  avatar
+                  inline
+                  style={{ width: "3em", height: "3em" }}
+                />
+                <span
+                  style={{
+                    marginLeft: "5px",
+                    fontWeight: "700",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  {user.name}
+                </span>
+              </Form.Group>
+              <Form.Group>
+                <Form.TextArea
+                  placeholder="Bạn đang nghĩ gì thế ?"
+                  name="text"
+                  value={newPost.text}
+                  onChange={handleChange}
+                  rows={2}
+                  width={16}
+                  style={{ border: "none" }}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                {showMap && (
+                  <Form.Input
+                    value={newPost.location}
+                    name="location"
+                    onChange={handleChange}
+                    label="Thêm vị trí"
+                    icon="map marker alternate"
+                    placeholder="Vị trí ?"
+                  />
+                )}
+
+                <input
+                  ref={inputRef}
+                  onChange={handleChange}
+                  name="media"
+                  style={{ display: "none" }}
+                  type="file"
+                  accept="image/*"
+                />
+              </Form.Group>
+
+              {hideImage && (
+                <div
+                  onClick={() => inputRef.current.click()}
+                  style={addStyles()}
+                  onDrag={(e) => {
+                    e.preventDefault();
+                    setHighlighted(true);
+                  }}
+                  onDragLeave={(e) => {
+                    e.preventDefault();
+                    setHighlighted(false);
+                  }}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setHighlighted(true);
+
+                    const droppedFile = Array.from(e.dataTransfer.files);
+
+                    setMedia(droppedFile[0]);
+                    setMediaPreview(URL.createObjectURL(droppedFile[0]));
+                  }}
+                >
+                  {media !== null && (
+                    <div>
+                      <Image
+                        style={{ height: "auto", width: "100%" }}
+                        src={mediaPreview}
+                        alt="PostImage"
+                        centered
+                        size="medium"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+              <Segment>
+                <Grid>
+                  <Grid.Column width={6}>
+                    <span>Thêm vào bài viết</span>
+                  </Grid.Column>
+                  <Grid.Column width={8} floated="right">
+                    <Icon
+                      name="images outline"
+                      color="teal"
+                      size="large"
+                      onClick={() => {
+                        inputRef.current.click();
+                        setHideImage(true);
+                      }}
+                      style={{ cursor: "pointer" }}
+                    />
+                    <Icon
+                      name="map marker alternate"
+                      color="red"
+                      size="large"
+                      style={{ cursor: "pointer", marginLeft: "20px" }}
+                      onClick={() => setShowMap(!showMap)}
+                    />
+                  </Grid.Column>
+                </Grid>
+              </Segment>
+
+              <Divider hidden />
+
+              <Button
+                circular
+                disabled={newPost.text === "" || loading}
+                content={<strong>Đăng</strong>}
+                style={{ backgroundColor: "#1DA1F2", color: "white" }}
+                icon="send"
+                loading={loading}
+              />
+            </Form>
+          </Modal.Content>
+        </Modal>
+      )}
     </>
   );
 }

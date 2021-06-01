@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Comment, Icon, Image } from "semantic-ui-react";
+import { Comment, Icon } from "semantic-ui-react";
 import calculateTime from "../../utils/calculateTime";
 import { deleteComment } from "../../utils/postActions";
 
@@ -24,7 +24,13 @@ function PostComments({ comment, user, setComments, postId }) {
             </Comment.Author>
             <Comment.Metadata>{calculateTime(comment.date)}</Comment.Metadata>
 
-            <Comment.Text>{comment.text}</Comment.Text>
+            <Comment.Text
+              style={{
+                fontSize: "0.8em",
+              }}
+            >
+              {comment.text}
+            </Comment.Text>
 
             <Comment.Actions
               style={{ position: "absolute", top: "10px", right: "10px" }}

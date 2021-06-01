@@ -100,19 +100,34 @@ function CardPost({ post, user, setPosts, setShowToastr }) {
               </>
             )}
 
-            <Card.Header>
-              <Link href={`/${post.user.username}`}>
-                <a>{post.user.name}</a>
-              </Link>
+            <Card.Header
+              style={{
+                fontSize: "1.1em",
+              }}
+            >
+              <Link href={`/${post.user.username}`}>{post.user.name}</Link>
             </Card.Header>
 
-            <Card.Meta>{calculateTime(post.createdAt)}</Card.Meta>
+            <Card.Meta
+              style={{
+                fontSize: "0.8em",
+              }}
+            >
+              {calculateTime(post.createdAt)}
+            </Card.Meta>
 
-            {post.location && <Card.Meta content={post.location} />}
+            {post.location && (
+              <Card.Meta
+                style={{
+                  fontSize: "0.8em",
+                }}
+                content={post.location}
+              />
+            )}
 
             <Card.Description
               style={{
-                fontSize: "17px",
+                fontSize: "1em",
                 letterSpacing: "0.1px",
                 wordSpacing: "0.35px",
               }}
@@ -154,11 +169,20 @@ function CardPost({ post, user, setPosts, setShowToastr }) {
             />
 
             <Icon
-              name="comment outline"
-              style={{ marginLeft: "7px", cursor: "pointer" }}
+              name="comment alternate outline"
+              style={{ marginLeft: "15px", cursor: "pointer" }}
               color="blue"
               onClick={() => setShowModal(true)}
             />
+
+            {comments.length > 0 && (
+              <span
+                className="spanLikesList"
+                onClick={() => setShowModal(true)}
+              >
+                {`${comments.length} bình luận`}
+              </span>
+            )}
 
             <Divider />
 

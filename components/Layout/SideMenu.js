@@ -32,7 +32,7 @@ function SideMenu({
         <Link href="/messages">
           <List.Item active={isActive("/messages")}>
             <Icon
-              name={unreadMessage ? "hand point right" : "mail outline"}
+              name={unreadMessage ? "hand point right" : "rocketchat"}
               size="large"
               color={
                 (isActive("/messages") && "teal") || (unreadMessage && "orange")

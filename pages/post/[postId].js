@@ -42,19 +42,34 @@ function PostPage({ post, errorLoading, user }) {
               avatar
               circular
             />
-            <Card.Header>
-              <Link href={`/${post.user.username}`}>
-                <a>{post.user.name}</a>
-              </Link>
+            <Card.Header
+              style={{
+                fontSize: "1.1em",
+              }}
+            >
+              <Link href={`/${post.user.username}`}>{post.user.name}</Link>
             </Card.Header>
 
-            <Card.Meta>{calculateTime(post.createdAt)}</Card.Meta>
+            <Card.Meta
+              style={{
+                fontSize: "0.8em",
+              }}
+            >
+              {calculateTime(post.createdAt)}
+            </Card.Meta>
 
-            {post.location && <Card.Meta content={post.location} />}
+            {post.location && (
+              <Card.Meta
+                style={{
+                  fontSize: "0.8em",
+                }}
+                content={post.location}
+              />
+            )}
 
             <Card.Description
               style={{
-                fontSize: "17px",
+                fontSize: "1em",
                 letterSpacing: "0.1px",
                 wordSpacing: "0.35px",
               }}
@@ -97,10 +112,12 @@ function PostPage({ post, errorLoading, user }) {
             />
 
             <Icon
-              name="comment outline"
-              style={{ marginLeft: "7px" }}
+              name="comment alternate outline"
+              style={{ marginLeft: "10px" }}
               color="blue"
             />
+
+            <Divider />
 
             {comments.length > 0 &&
               comments.map((comment) => (

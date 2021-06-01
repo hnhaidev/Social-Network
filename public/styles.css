@@ -1,9 +1,10 @@
 :root {
   --progressBar: #54d1db;
+  --background: #f0f2f5;
 }
 
 body {
-  background: #fafafa !important;
+  background: var(--background) !important;
 }
 
 .spanLikesList:hover {

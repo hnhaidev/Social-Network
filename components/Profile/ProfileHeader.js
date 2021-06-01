@@ -53,40 +53,56 @@ function ProfileHeader({
                   {profile.social.facebook && (
                     <List.Item>
                       <List.Icon name="facebook" color="blue" />
-                      <List.Content
-                        style={{ color: "blue" }}
-                        content={profile.social.facebook}
-                      />
+                      <List.Content>
+                        <a
+                          style={{ color: "blue" }}
+                          href={`https://www.facebook.com/${profile.social.facebook}`}
+                        >
+                          {profile.social.facebook}
+                        </a>
+                      </List.Content>
                     </List.Item>
                   )}
 
                   {profile.social.instagram && (
                     <List.Item>
                       <List.Icon name="instagram" color="red" />
-                      <List.Content
-                        style={{ color: "blue" }}
-                        content={profile.social.instagram}
-                      />
+                      <List.Content>
+                        <a
+                          style={{ color: "blue" }}
+                          href={`https://www.instagram.com/${profile.social.instagram}`}
+                        >
+                          {profile.social.instagram}
+                        </a>
+                      </List.Content>
                     </List.Item>
                   )}
 
                   {profile.social.youtube && (
                     <List.Item>
                       <List.Icon name="youtube" color="red" />
-                      <List.Content
-                        style={{ color: "blue" }}
-                        content={profile.social.youtube}
-                      />
+                      <List.Content>
+                        <a
+                          style={{ color: "blue" }}
+                          href={`https://www.youtube.com/c/${profile.social.youtube}`}
+                        >
+                          {profile.social.youtube}
+                        </a>
+                      </List.Content>
                     </List.Item>
                   )}
 
                   {profile.social.twitter && (
                     <List.Item>
                       <List.Icon name="twitter" color="blue" />
-                      <List.Content
-                        style={{ color: "blue" }}
-                        content={profile.social.twitter}
-                      />
+                      <List.Content>
+                        <a
+                          style={{ color: "blue" }}
+                          href={`https://twitter.com/${profile.social.instagram}`}
+                        >
+                          {profile.social.instagram}
+                        </a>
+                      </List.Content>
                     </List.Item>
                   )}
                 </List>

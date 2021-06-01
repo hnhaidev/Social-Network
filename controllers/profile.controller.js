@@ -234,7 +234,7 @@ module.exports.postUpdatePassword = async (req, res) => {
     const { currentPassword, newPassword } = req.body;
 
     if (newPassword.length < 6) {
-      return res.status(400).send("Password must be atleast 6 characters");
+      return res.status(400).send("Mật khẩu phải ít nhất 6 kí tự !");
     }
 
     const user = await UserModel.findById(req.userId).select("+password");
@@ -242,16 +242,16 @@ module.exports.postUpdatePassword = async (req, res) => {
     const isPassword = await bcrypt.compare(currentPassword, user.password);
 
     if (!isPassword) {
-      return res.status(401).send("Invalid Password");
+      return res.status(401).send("Mật khẩu không hợp lệ !");
     }
 
     user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
 
-    res.status(200).send("Updated successfully");
+    res.status(200).send("Cập nhật thành công !");
   } catch (error) {
     console.error(error);
-    return res.status(500).send("Server Error");
+    return res.status(500).send("Lỗi erver !");
   }
 };
 
