@@ -100,6 +100,7 @@ const Instructions = ({ username }) => (
       <Icon name="help" />
       <List.Content>
         <List.Header>
+          {" "}
           Nếu bạn không muốn cửa sổ bật lên này xuất hiện khi bạn nhận được tin
           nhắn mới:
         </List.Header>
@@ -109,6 +110,7 @@ const Instructions = ({ username }) => (
     <List.Item>
       <Icon name="hand point right" />
       <List.Content>
+        {" "}
         Bạn có thể tắt nó bằng cách đi tới
         <Link href={`/${username}`}>
           <a> Tài khoản </a>
@@ -118,14 +120,13 @@ const Instructions = ({ username }) => (
     </List.Item>
 
     <List.Item>
-      <Icon name="hand point right" />
-      Bên trong menu, có một cài đặt có tên: Hiển thị cửa sổ bật lên tin nhắn
-      mới?
+      <Icon name="hand point right" /> Bên trong menu, có một cài đặt có tên:
+      Hiển thị cửa sổ bật lên tin nhắn mới?
     </List.Item>
 
     <List.Item>
-      <Icon name="hand point right" />
-      Chỉ cần chuyển đổi cài đặt để tắt / bật thông báo bật lên xuất hiện.
+      <Icon name="hand point right" /> Chỉ cần chuyển đổi cài đặt để tắt / bật
+      thông báo bật lên xuất hiện.
     </List.Item>
   </List>
 );

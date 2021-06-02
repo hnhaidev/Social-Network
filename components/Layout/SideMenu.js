@@ -6,6 +6,7 @@ import { logoutUser } from "../../utils/authUser";
 
 function SideMenu({
   user: { unreadNotification, email, unreadMessage, username },
+  pc = true,
 }) {
   const router = useRouter();
 
@@ -23,23 +24,23 @@ function SideMenu({
           <List.Item active={isActive("/")}>
             <Icon name="home" size="large" color={isActive("/") && "teal"} />
             <List.Content>
-              <List.Header content="Trang chủ" />
+              {pc && <List.Header content="Trang chủ" />}
             </List.Content>
           </List.Item>
         </Link>
         <br />
 
         <Link href="/messages">
-          <List.Item active={isActive("/messages")}>
+          <List.Item active={isActive("/messages")} as="a" href="/messages">
             <Icon
-              name={unreadMessage ? "hand point right" : "rocketchat"}
+              name={unreadMessage ? "mail" : "mail outline"}
               size="large"
               color={
                 (isActive("/messages") && "teal") || (unreadMessage && "orange")
               }
             />
             <List.Content>
-              <List.Header content="Trò chuyện" />
+              {pc && <List.Header content="Trò chuyện" />}
             </List.Content>
           </List.Item>
         </Link>
@@ -48,7 +49,7 @@ function SideMenu({
         <Link href="/notifications">
           <List.Item active={isActive("/notifications")}>
             <Icon
-              name={unreadNotification ? "hand point right" : "bell outline"}
+              name={unreadNotification ? "bell" : "bell outline"}
               size="large"
               color={
                 (isActive("/notifications") && "teal") ||
@@ -56,7 +57,7 @@ function SideMenu({
               }
             />
             <List.Content>
-              <List.Header content="Thông báo" />
+              {pc && <List.Header content="Thông báo" />}
             </List.Content>
           </List.Item>
         </Link>
@@ -70,7 +71,7 @@ function SideMenu({
               color={router.query.username === username && "teal"}
             />
             <List.Content>
-              <List.Header content="Tài khoản" />
+              {pc && <List.Header content="Trang cá nhân" />}
             </List.Content>
           </List.Item>
         </Link>
@@ -79,7 +80,7 @@ function SideMenu({
         <List.Item onClick={() => logoutUser(email)}>
           <Icon name="log out" size="large" />
           <List.Content>
-            <List.Header content="Đăng xuất" />
+            {pc && <List.Header content="Đăng xuất" />}
           </List.Content>
         </List.Item>
       </List>

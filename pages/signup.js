@@ -109,111 +109,113 @@ function Signup() {
 
   return (
     <>
-      <HeaderMessage />
-      <Form
-        loading={formLoading}
-        error={errorMsg !== null}
-        onSubmit={handleSubmit}
-      >
-        <Message
-          error
-          header="Oops!"
-          content={errorMsg}
-          onDismiss={() => setErrorMsg(null)}
-        />
-
-        <Segment>
-          <ImageDropDiv
-            mediaPreview={mediaPreview}
-            setMediaPreview={setMediaPreview}
-            setMedia={setMedia}
-            inputRef={inputRef}
-            highlighted={highlighted}
-            setHighlighted={setHighlighted}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            required
-            label="Họ và Tên"
-            placeholder="Name"
-            name="name"
-            value={name}
-            onChange={handleChange}
-            fluid
-            icon="user"
-            iconPosition="left"
+      <Segment>
+        <HeaderMessage />
+        <Form
+          loading={formLoading}
+          error={errorMsg !== null}
+          onSubmit={handleSubmit}
+        >
+          <Message
+            error
+            header="Oops!"
+            content={errorMsg}
+            onDismiss={() => setErrorMsg(null)}
           />
 
-          <Form.Input
-            required
-            label="Email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            fluid
-            icon="envelope"
-            iconPosition="left"
-            type="email"
-          />
+          <Segment>
+            <ImageDropDiv
+              mediaPreview={mediaPreview}
+              setMediaPreview={setMediaPreview}
+              setMedia={setMedia}
+              inputRef={inputRef}
+              highlighted={highlighted}
+              setHighlighted={setHighlighted}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              required
+              label="Họ và Tên"
+              placeholder="Name"
+              name="name"
+              value={name}
+              onChange={handleChange}
+              fluid
+              icon="user"
+              iconPosition="left"
+            />
 
-          <Form.Input
-            label="Mật khẩu"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            fluid
-            icon={{
-              name: "eye",
-              circular: true,
-              link: true,
-              onClick: () => setShowPassword(!showPassword),
-            }}
-            iconPosition="left"
-            type={showPassword ? "text" : "password"}
-            required
-          />
+            <Form.Input
+              required
+              label="Email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              fluid
+              icon="envelope"
+              iconPosition="left"
+              type="email"
+            />
 
-          <Form.Input
-            loading={usernameLoading}
-            error={!usernameAvailable}
-            required
-            label="Tên tài khoản"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-              if (regexUserName.test(e.target.value)) {
-                setUsernameAvailable(true);
-              } else {
-                setUsernameAvailable(false);
-              }
-            }}
-            fluid
-            icon={usernameAvailable ? "check" : "close"}
-            iconPosition="left"
-          />
+            <Form.Input
+              label="Mật khẩu"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              fluid
+              icon={{
+                name: "eye",
+                circular: true,
+                link: true,
+                onClick: () => setShowPassword(!showPassword),
+              }}
+              iconPosition="left"
+              type={showPassword ? "text" : "password"}
+              required
+            />
 
-          <CommonInputs
-            user={user}
-            showSocialLinks={showSocialLinks}
-            setShowSocialLinks={setShowSocialLinks}
-            handleChange={handleChange}
-          />
+            <Form.Input
+              loading={usernameLoading}
+              error={!usernameAvailable}
+              required
+              label="Tên tài khoản"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                if (regexUserName.test(e.target.value)) {
+                  setUsernameAvailable(true);
+                } else {
+                  setUsernameAvailable(false);
+                }
+              }}
+              fluid
+              icon={usernameAvailable ? "check" : "close"}
+              iconPosition="left"
+            />
 
-          <Divider hidden />
-          <Button
-            icon="signup"
-            content="Đăng ký"
-            type="submit"
-            color="orange"
-            disabled={submitDisabled || !usernameAvailable}
-          />
-        </Segment>
-      </Form>
+            <CommonInputs
+              user={user}
+              showSocialLinks={showSocialLinks}
+              setShowSocialLinks={setShowSocialLinks}
+              handleChange={handleChange}
+            />
 
-      <FooterMessage />
+            <Divider hidden />
+            <Button
+              icon="signup"
+              content="Đăng ký"
+              type="submit"
+              color="orange"
+              disabled={submitDisabled || !usernameAvailable}
+            />
+          </Segment>
+        </Form>
+
+        <FooterMessage />
+      </Segment>
     </>
   );
 }

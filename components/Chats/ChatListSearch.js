@@ -15,6 +15,10 @@ function ChatListSearch({ chats, setChats }) {
   const handleChange = async (e) => {
     const { value } = e.target;
     setText(value);
+
+    if (value.length === 0) return;
+    if (value.trim().length === 0) return;
+
     setLoading(true);
 
     try {
@@ -35,11 +39,11 @@ function ChatListSearch({ chats, setChats }) {
     } catch (error) {
       alert("Lỗi khi đang tìm kiếm !");
     }
-
     setLoading(false);
   };
 
   const addChat = (result) => {
+    setText("");
     const alreadyInChat =
       chats.length > 0 &&
       chats.filter((chat) => chat.messagesWith === result._id).length > 0;
@@ -83,10 +87,22 @@ function ChatListSearch({ chats, setChats }) {
 
 const ResultRenderer = ({ _id, profilePicUrl, name }) => {
   return (
-    <List key={_id}>
-      <List.Item>
-        <Image src={profilePicUrl} alt="ProfilePic" avatar />
-        <List.Content header={name} as="a" />
+    <List>
+      <List.Item
+        key={_id}
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          avatar
+          src={profilePicUrl}
+          style={{ borderRadius: "50%", width: "2.5em", height: "2.5em" }}
+        />
+        <a style={{ fontSize: "1.1em", fontWeight: "600", marginLeft: "1em" }}>
+          {name}
+        </a>
       </List.Item>
     </List>
   );

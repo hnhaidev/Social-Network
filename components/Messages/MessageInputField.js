@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Segment } from "semantic-ui-react";
+import { Form, Segment, Icon } from "semantic-ui-react";
 
 function MessageInputField({ sendMsg }) {
   const [text, setText] = useState("");

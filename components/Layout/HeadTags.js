@@ -12,7 +12,7 @@ const HeadTags = () => (
       <link rel="stylesheet" type="text/css" href="/styles.css" />
       <link rel="stylesheet" type="text/css" href="/nprogress.css" />
 
-      <title>Mini Social Network</title>
+      <title>HNH Network</title>
     </Head>
   </>
 );

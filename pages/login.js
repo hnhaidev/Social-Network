@@ -46,63 +46,65 @@ function Login() {
 
   return (
     <>
-      <HeaderMessage />
-      <Form
-        loading={formLoading}
-        error={errorMsg !== null}
-        onSubmit={handleSubmit}
-      >
-        <Message
-          error
-          header="Oops!"
-          content={errorMsg}
-          onDismiss={() => setErrorMsg(null)}
-        />
-
-        <Segment>
-          <Form.Input
-            required
-            label="Email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            fluid
-            icon="envelope"
-            iconPosition="left"
-            type="email"
+      <Segment>
+        <HeaderMessage />
+        <Form
+          loading={formLoading}
+          error={errorMsg !== null}
+          onSubmit={handleSubmit}
+        >
+          <Message
+            error
+            header="Oops!"
+            content={errorMsg}
+            onDismiss={() => setErrorMsg(null)}
           />
 
-          <Form.Input
-            label="Mật khẩu"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            fluid
-            icon={{
-              name: "eye",
-              circular: true,
-              link: true,
-              onClick: () => setShowPassword(!showPassword),
-            }}
-            iconPosition="left"
-            type={showPassword ? "text" : "password"}
-            required
-          />
+          <Segment>
+            <Form.Input
+              required
+              label="Email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              fluid
+              icon="envelope"
+              iconPosition="left"
+              type="email"
+            />
 
-          <Divider hidden />
-          <Button
-            icon="signup"
-            content="Đăng nhập"
-            type="submit"
-            color="orange"
-            disabled={submitDisabled}
-          />
-        </Segment>
-      </Form>
+            <Form.Input
+              label="Mật khẩu"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              fluid
+              icon={{
+                name: "eye",
+                circular: true,
+                link: true,
+                onClick: () => setShowPassword(!showPassword),
+              }}
+              iconPosition="left"
+              type={showPassword ? "text" : "password"}
+              required
+            />
 
-      <FooterMessage />
+            <Divider hidden />
+            <Button
+              icon="signup"
+              content="Đăng nhập"
+              type="submit"
+              color="orange"
+              disabled={submitDisabled}
+            />
+          </Segment>
+        </Form>
+
+        <FooterMessage />
+      </Segment>
     </>
   );
 }

@@ -22,6 +22,7 @@ const {
   setMsgToUnread,
   deleteMsg,
 } = require("./utilsServer/messageActions");
+const { likeOrUnlikePost } = require("./utilsServer/likeOrUnlikePost");
 
 // Để tiếp nhận và lắng nghe dữ liệu => socket.on(). Còn để phát dữ liệu => socket.emit().
 io.on("connection", (socket) => {
@@ -35,6 +36,30 @@ io.on("connection", (socket) => {
         users: users.filter((user) => user.userId !== userId),
       });
     }, 10000);
+  });
+
+  // tạo realtime khi like post
+  socket.on("likePost", async ({ postId, userId, like }) => {
+    const { success, name, profilePicUrl, username, postByUserId, error } =
+      await likeOrUnlikePost(postId, userId, like);
+
+    if (success) {
+      socket.emit("postLiked");
+
+      if (postByUserId !== userId) {
+        const receiverSocket = findConnectedUser(postByUserId);
+
+        if (receiverSocket && like) {
+          // Gửi dữ liệu cho client cụ thể
+          io.to(receiverSocket.socketId).emit("newNotificationReceived", {
+            name,
+            profilePicUrl,
+            username,
+            postId,
+          });
+        }
+      }
+    }
   });
 
   socket.on("loadMessages", async ({ userId, messagesWith }) => {

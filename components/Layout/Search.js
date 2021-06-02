@@ -69,14 +69,22 @@ function SearchComponent() {
 
 const ResultRenderer = ({ _id, profilePicUrl, name }) => {
   return (
-    <List key={_id}>
-      <List.Item>
-        <List.Content header={name} as="a" />
+    <List>
+      <List.Item
+        key={_id}
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <Image
           avatar
           src={profilePicUrl}
-          style={{ borderRadius: "50% !important" }}
+          style={{ borderRadius: "50%", width: "2.5em", height: "2.5em" }}
         />
+        <a style={{ fontSize: "1.1em", fontWeight: "600", marginLeft: "1em" }}>
+          {name}
+        </a>
       </List.Item>
     </List>
   );

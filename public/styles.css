@@ -43,6 +43,6 @@ body {
   font-size: 1em !important;
 }
 
-.ui.comments .comment .avatar img {
+.avatar img {
   border-radius: 50% !important;
 }

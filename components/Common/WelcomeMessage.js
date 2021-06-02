@@ -11,7 +11,7 @@ export const HeaderMessage = () => {
       color="teal"
       attached
       header={signupRoute ? "Đăng Ký" : "Đăng Nhập"}
-      icon={signupRoute ? "setting" : "privacy"}
+      icon={signupRoute ? "add user" : "user circle outline"}
       content={signupRoute ? "Tạo tài khoản mới" : "Đăng nhập bằng Email"}
     />
   );

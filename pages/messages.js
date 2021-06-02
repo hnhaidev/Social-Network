@@ -33,6 +33,13 @@ function Messages({ chatsData, user }) {
 
   // Tham chiếu này là để duy trì trạng thái của chuỗi truy vấn trong url trong suốt các lần hiển thị. Tham chiếu này là giá trị của chuỗi truy vấn bên trong url
   const openChatId = useRef("");
+  document.title = `Hộp thư * Chat`;
+
+  useEffect(() => {
+    setInterval(() => {
+      document.title = `Hộp thư * Chat`;
+    }, 5000);
+  }, []);
 
   // Kết nối useEffect
   useEffect(() => {
@@ -228,17 +235,14 @@ function Messages({ chatsData, user }) {
   return (
     <>
       <Segment padded basic size="large" style={{ marginTop: "5px" }}>
-        <Header
-          icon="home"
-          content="Trở về trang chủ!"
-          onClick={() => router.push("/")}
-          style={{ cursor: "pointer" }}
-        />
+        <a href="/">
+          <Header
+            icon="home"
+            content="Go Back!"
+            style={{ cursor: "pointer" }}
+          />
+        </a>
         <Divider hidden />
-
-        <div style={{ marginBottom: "10px" }}>
-          <ChatListSearch chats={chats} setChats={setChats} />
-        </div>
 
         {chats.length > 0 ? (
           <>
@@ -249,6 +253,9 @@ function Messages({ chatsData, user }) {
                     raised
                     style={{ overflow: "auto", maxHeight: "32rem" }}
                   >
+                    <div style={{ marginBottom: "10px" }}>
+                      <ChatListSearch chats={chats} setChats={setChats} />
+                    </div>
                     {chats.map((chat, i) => (
                       <Chat
                         key={i}

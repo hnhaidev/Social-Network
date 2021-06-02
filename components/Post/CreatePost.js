@@ -9,7 +9,6 @@ import {
   Segment,
   Grid,
   Modal,
-  Card,
 } from "semantic-ui-react";
 import uploadPic from "../../utils/uploadPicToCloudinary";
 import { submitNewPost } from "../../utils/postActions";
@@ -21,7 +20,6 @@ function CreatePost({ user, setPosts }) {
 
   const [error, setError] = useState(null);
   const [highlighted, setHighlighted] = useState(false);
-  const [hideImage, setHideImage] = useState(false);
   const [showMap, setShowMap] = useState(false);
 
   const [media, setMedia] = useState(null);
@@ -76,15 +74,8 @@ function CreatePost({ user, setPosts }) {
     setMediaPreview(null);
     setLoading(false);
     setShowModal(false);
-    setHideImage(false);
     setShowMap(false);
   };
-
-  useEffect(() => {
-    if (media === null) {
-      setHideImage(false);
-    }
-  }, [media]);
 
   return (
     <>
@@ -92,11 +83,25 @@ function CreatePost({ user, setPosts }) {
         <Grid>
           <Grid.Column
             width={1}
-            style={{ paddingRight: "0", paddingLeft: "0", marginLeft: "1rem" }}
+            style={{
+              paddingRight: "0",
+              paddingLeft: "0",
+              marginLeft: "1rem",
+              marginRight: "1rem",
+            }}
           >
-            <Image src={user.profilePicUrl} circular avatar inline />
+            <img
+              src={user.profilePicUrl}
+              style={{
+                width: "2.5rem",
+                height: "2.5rem",
+                borderRadius: "50%",
+                marginRight: "1em",
+                float: "left",
+              }}
+            />
           </Grid.Column>
-          <Grid.Column width={14} style={{ paddingRight: "0.5rem" }}>
+          <Grid.Column width={13} style={{ paddingRight: "0.5rem" }}>
             <Button fluid circular onClick={() => setShowModal(true)}>
               Bạn đang nghĩ gì thế ?
             </Button>
@@ -174,7 +179,7 @@ function CreatePost({ user, setPosts }) {
                 />
               </Form.Group>
 
-              {hideImage && (
+              {mediaPreview && (
                 <div
                   onClick={() => inputRef.current.click()}
                   style={addStyles()}
@@ -209,6 +214,7 @@ function CreatePost({ user, setPosts }) {
                   )}
                 </div>
               )}
+
               <Segment>
                 <Grid>
                   <Grid.Column width={6}>
@@ -221,7 +227,6 @@ function CreatePost({ user, setPosts }) {
                       size="large"
                       onClick={() => {
                         inputRef.current.click();
-                        setHideImage(true);
                       }}
                       style={{ cursor: "pointer" }}
                     />
@@ -239,6 +244,7 @@ function CreatePost({ user, setPosts }) {
               <Divider hidden />
 
               <Button
+                fluid
                 circular
                 disabled={newPost.text === "" || loading}
                 content={<strong>Đăng</strong>}

@@ -19,7 +19,16 @@ function NoImageModal({
   return (
     <Card fluid>
       <Card.Content>
-        <Image floated="left" avatar src={post.user.profilePicUrl} />
+        <img
+          src={post.user.profilePicUrl}
+          style={{
+            width: "2.5rem",
+            height: "2.5rem",
+            borderRadius: "50%",
+            marginRight: "1em",
+            float: "left",
+          }}
+        />
 
         <Card.Header>
           <Link href={`/${post.user.username}`}>
@@ -29,7 +38,9 @@ function NoImageModal({
 
         <Card.Meta>{calculateTime(post.createdAt)}</Card.Meta>
 
-        {post.location && <Card.Meta content={post.location} />}
+        {post.location && (
+          <Card.Meta content={post.location} style={{ marginLeft: "3.5rem" }} />
+        )}
 
         <Card.Description
           style={{

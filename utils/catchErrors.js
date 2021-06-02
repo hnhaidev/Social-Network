@@ -2,18 +2,18 @@ const catchErrors = (error) => {
   let errorMsg;
 
   if (error.response) {
-    // If the request was made and the server not responded with a status code in the range of 2xx
+    // Nếu yêu cầu được thực hiện và máy chủ không phản hồi với mã trạng thái trong phạm vi 2xx
 
     errorMsg = error.response.data;
 
     console.error(errorMsg);
   } else if (error.request) {
-    // if the request was made and no response was recevied from server
+    // Nếu yêu cầu được thực hiện và không nhận được phản hồi từ máy chủ
     errorMsg = error.request;
 
     console.error(errorMsg);
   } else {
-    // if something else happened while making the request
+    // Nếu có điều gì khác xảy ra trong khi thực hiện yêu cầu
     errorMsg = error.message;
 
     console.error(errorMsg);
