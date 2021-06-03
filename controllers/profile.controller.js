@@ -191,7 +191,7 @@ module.exports.postUpdateProfile = async (req, res) => {
   try {
     const { userId } = req;
 
-    const { bio, facebook, youtube, twitter, instagram, profilePicUrl } =
+    const { bio, facebook, youtube, twitter, instagram, profilePicUrl, name } =
       req.body;
 
     let profileFields = {};
@@ -214,6 +214,12 @@ module.exports.postUpdateProfile = async (req, res) => {
       { $set: profileFields },
       { new: true }
     );
+
+    if (name) {
+      const user = await UserModel.findById(userId);
+      user.name = name;
+      await user.save();
+    }
 
     if (profilePicUrl) {
       const user = await UserModel.findById(userId);

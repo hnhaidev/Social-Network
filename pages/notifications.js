@@ -39,25 +39,27 @@ function Notifications({ notifications, errorLoading, user, userFollowStats }) {
                 overflow: "auto",
                 height: "40rem",
                 position: "relative",
-                width: "100%"
+                width: "100%",
               }}
             >
               <Feed size="small">
-                {notifications.map(notification => (
+                {notifications.map((notification) => (
                   <>
-                    {notification.type === "newLike" && notification.post !== null && (
-                      <LikeNotification
-                        key={notification._id}
-                        notification={notification}
-                      />
-                    )}
+                    {notification.type === "newLike" &&
+                      notification.post !== null && (
+                        <LikeNotification
+                          key={notification._id}
+                          notification={notification}
+                        />
+                      )}
 
-                    {notification.type === "newComment" && notification.post !== null && (
-                      <CommentNotification
-                        key={notification._id}
-                        notification={notification}
-                      />
-                    )}
+                    {notification.type === "newComment" &&
+                      notification.post !== null && (
+                        <CommentNotification
+                          key={notification._id}
+                          notification={notification}
+                        />
+                      )}
 
                     {notification.type === "newFollower" && (
                       <FollowerNotification
@@ -81,12 +83,12 @@ function Notifications({ notifications, errorLoading, user, userFollowStats }) {
   );
 }
 
-Notifications.getInitialProps = async ctx => {
+Notifications.getInitialProps = async (ctx) => {
   try {
     const { token } = parseCookies(ctx);
 
     const res = await axios.get(`${baseUrl}/api/notifications`, {
-      headers: { Authorization: token }
+      headers: { Authorization: token },
     });
 
     return { notifications: res.data };

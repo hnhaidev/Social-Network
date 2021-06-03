@@ -69,9 +69,8 @@ function SearchComponent() {
 
 const ResultRenderer = ({ _id, profilePicUrl, name }) => {
   return (
-    <List>
+    <List key={_id}>
       <List.Item
-        key={_id}
         style={{
           display: "flex",
           alignItems: "center",

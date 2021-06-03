@@ -74,7 +74,9 @@ export const PlaceHolderNotifications = () =>
 
 export const EndMessage = () => (
   <Container textAlign="center">
-    <Icon name="refresh" size="large" />
+    <a href="/" style={{ color: "teal" }}>
+      <Icon name="refresh" size="large" />
+    </a>
     <Divider hidden />
   </Container>
 );

@@ -6,7 +6,7 @@ import { parseCookies } from "nookies";
 import { useRouter } from "next/router";
 import { Segment, Header, Divider, Comment, Grid } from "semantic-ui-react";
 import Chat from "../components/Chats/Chat";
-import ChatListSearch from "../components/Chats/ChatListSearch";
+import MobileMenu from "../components/Chats/MobileMenu";
 import { NoMessages } from "../components/Layout/NoData";
 import Banner from "../components/Messages/Banner";
 import MessageInputField from "../components/Messages/MessageInputField";
@@ -234,15 +234,8 @@ function Messages({ chatsData, user }) {
 
   return (
     <>
-      <Segment padded basic size="large" style={{ marginTop: "5px" }}>
-        <a href="/">
-          <Header
-            icon="home"
-            content="Go Back!"
-            style={{ cursor: "pointer" }}
-          />
-        </a>
-        <Divider hidden />
+      <Segment padded basic size="large" style={{ paddingTop: "0" }}>
+        <MobileMenu chats={chats} setChats={setChats} />
 
         {chats.length > 0 ? (
           <>
@@ -253,9 +246,6 @@ function Messages({ chatsData, user }) {
                     raised
                     style={{ overflow: "auto", maxHeight: "32rem" }}
                   >
-                    <div style={{ marginBottom: "10px" }}>
-                      <ChatListSearch chats={chats} setChats={setChats} />
-                    </div>
                     {chats.map((chat, i) => (
                       <Chat
                         key={i}

@@ -15,6 +15,7 @@ import SideMenu from "./SideMenu";
 import Search from "./Search";
 import MobileHeader from "./MobileHeader";
 import { createMedia } from "@artsy/fresnel";
+import Suggested from "./Suggested";
 
 // Tạo tỉ lệ để responsive
 const AppMedia = createMedia({
@@ -68,6 +69,7 @@ function Layout({ children, user }) {
                           <Sticky context={contextRef}>
                             <Segment basic>
                               <Search />
+                              <Suggested />
                             </Segment>
                           </Sticky>
                         </Grid.Column>
@@ -153,7 +155,8 @@ function Layout({ children, user }) {
       ) : (
         <div
           style={{
-            backgroundImage: "url('/loginImg.jpg')",
+            backgroundImage:
+              "url('https://images.pexels.com/photos/5240544/pexels-photo-5240544.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260')",
             backgroundPosition: "center",
             backgroundSize: "cover",
             height: "250vh",

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Form, Button, Message, Divider } from "semantic-ui-react";
 import ImageDropDiv from "../Common/ImageDropDiv";
 import CommonInputs from "../Common/CommonInputs";
@@ -8,12 +8,14 @@ import { profileUpdate } from "../../utils/profileActions";
 function UpdateProfile({ Profile }) {
   const [profile, setProfile] = useState({
     profilePicUrl: Profile.user.profilePicUrl,
+    name: Profile.user.name,
     bio: Profile.bio || "",
     facebook: (Profile.social && Profile.social.facebook) || "",
     youtube: (Profile.social && Profile.social.youtube) || "",
     instagram: (Profile.social && Profile.social.instagram) || "",
     twitter: (Profile.social && Profile.social.twitter) || "",
   });
+  const { name, bio } = profile;
 
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -24,6 +26,7 @@ function UpdateProfile({ Profile }) {
   const inputRef = useRef();
   const [media, setMedia] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -34,6 +37,10 @@ function UpdateProfile({ Profile }) {
     }
     setProfile((prev) => ({ ...prev, [name]: value }));
   };
+  useEffect(() => {
+    const isUser = Object.values({ name, bio }).every((item) => Boolean(item));
+    isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
+  }, [profile]);
 
   return (
     <>
@@ -55,7 +62,13 @@ function UpdateProfile({ Profile }) {
             return setErrorMsg("Lỗi gửi hình ảnh !");
           }
 
-          await profileUpdate(profile, setLoading, setErrorMsg, profilePicUrl);
+          await profileUpdate(
+            profile,
+            setLoading,
+            setErrorMsg,
+            profilePicUrl,
+            name
+          );
         }}
       >
         <Message
@@ -77,6 +90,18 @@ function UpdateProfile({ Profile }) {
           profilePicUrl={profile.profilePicUrl}
         />
 
+        <Form.Input
+          required
+          label="Họ và Tên"
+          placeholder="Họ và Tên"
+          name="name"
+          value={name}
+          onChange={handleChange}
+          fluid
+          icon="user"
+          iconPosition="left"
+        />
+
         <CommonInputs
           user={profile}
           handleChange={handleChange}
@@ -89,7 +114,7 @@ function UpdateProfile({ Profile }) {
         <Button
           color="blue"
           icon="pencil alternate"
-          disabled={profile.bio === "" || loading}
+          disabled={submitDisabled || loading}
           content="Lưu"
           type="submit"
         />

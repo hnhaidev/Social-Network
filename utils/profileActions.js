@@ -6,16 +6,16 @@ import Router from "next/router";
 
 const Axios = axios.create({
   baseURL: `${baseUrl}/api/profile`,
-  headers: { Authorization: cookie.get("token") }
+  headers: { Authorization: cookie.get("token") },
 });
 
 export const followUser = async (userToFollowId, setUserFollowStats) => {
   try {
     await Axios.post(`/follow/${userToFollowId}`);
 
-    setUserFollowStats(prev => ({
+    setUserFollowStats((prev) => ({
       ...prev,
-      following: [...prev.following, { user: userToFollowId }]
+      following: [...prev.following, { user: userToFollowId }],
     }));
   } catch (error) {
     alert(catchErrors(error));
@@ -26,16 +26,24 @@ export const unfollowUser = async (userToUnfollowId, setUserFollowStats) => {
   try {
     await Axios.put(`/unfollow/${userToUnfollowId}`);
 
-    setUserFollowStats(prev => ({
+    setUserFollowStats((prev) => ({
       ...prev,
-      following: prev.following.filter(following => following.user !== userToUnfollowId)
+      following: prev.following.filter(
+        (following) => following.user !== userToUnfollowId
+      ),
     }));
   } catch (error) {
     alert(catchErrors(error));
   }
 };
 
-export const profileUpdate = async (profile, setLoading, setError, profilePicUrl) => {
+export const profileUpdate = async (
+  profile,
+  setLoading,
+  setError,
+  profilePicUrl,
+  name
+) => {
   try {
     const { bio, facebook, youtube, twitter, instagram } = profile;
 
@@ -45,7 +53,8 @@ export const profileUpdate = async (profile, setLoading, setError, profilePicUrl
       youtube,
       twitter,
       instagram,
-      profilePicUrl
+      profilePicUrl,
+      name,
     });
 
     setLoading(false);
@@ -67,7 +76,11 @@ export const passwordUpdate = async (setSuccess, userPasswords) => {
   }
 };
 
-export const toggleMessagePopup = async (popupSetting, setPopupSetting, setSuccess) => {
+export const toggleMessagePopup = async (
+  popupSetting,
+  setPopupSetting,
+  setSuccess
+) => {
   try {
     await Axios.post(`/settings/messagePopup`);
 
