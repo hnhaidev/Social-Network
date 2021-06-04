@@ -87,7 +87,6 @@ function Index({ user, postsData, errorLoading }) {
       alert("Lỗi khi tìm nạp bài đăng !");
     }
   };
-  if (posts.length === 0 || errorLoading) return <NoPosts />;
 
   useEffect(() => {
     if (socket.current) {
@@ -126,24 +125,28 @@ function Index({ user, postsData, errorLoading }) {
       <Segment basic>
         <CreatePost user={user} setPosts={setPosts} />
 
-        <InfiniteScroll
-          hasMore={hasMore}
-          next={fetchDataOnScroll}
-          loader={<PlaceHolderPosts />}
-          endMessage={<EndMessage />}
-          dataLength={posts.length}
-        >
-          {posts.map((post) => (
-            <CardPost
-              socket={socket}
-              key={post._id}
-              post={post}
-              user={user}
-              setPosts={setPosts}
-              setShowToastr={setShowToastr}
-            />
-          ))}
-        </InfiniteScroll>
+        {posts.length === 0 || errorLoading ? (
+          <NoPosts />
+        ) : (
+          <InfiniteScroll
+            hasMore={hasMore}
+            next={fetchDataOnScroll}
+            loader={<PlaceHolderPosts />}
+            endMessage={<EndMessage />}
+            dataLength={posts.length}
+          >
+            {posts.map((post) => (
+              <CardPost
+                socket={socket}
+                key={post._id}
+                post={post}
+                user={user}
+                setPosts={setPosts}
+                setShowToastr={setShowToastr}
+              />
+            ))}
+          </InfiniteScroll>
+        )}
       </Segment>
     </>
   );

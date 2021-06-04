@@ -30,12 +30,12 @@ io.on("connection", (socket) => {
     const users = await addUser(userId, socket.id);
     console.log(users);
 
-    // kiểm tra người dùng ol ... 10s
+    // kiểm tra người dùng ol ... 5s
     setInterval(() => {
       socket.emit("connectedUsers", {
         users: users.filter((user) => user.userId !== userId),
       });
-    }, 10000);
+    }, 5000);
   });
 
   // tạo realtime khi like post
