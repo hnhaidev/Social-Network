@@ -39,7 +39,7 @@ function Login() {
   };
 
   useEffect(() => {
-    document.title = "Welcome Back";
+    document.title = "Welcome Back | Đăng Nhập";
     const userEmail = cookie.get("userEmail");
     if (userEmail) setUser((prev) => ({ ...prev, email: userEmail }));
   }, []);

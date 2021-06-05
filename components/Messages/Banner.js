@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Grid, Image } from "semantic-ui-react";
+import { Segment, Grid, Image, Icon } from "semantic-ui-react";
 
 function Banner({ bannerData }) {
   const { name, profilePicUrl } = bannerData;
@@ -12,6 +12,22 @@ function Banner({ bannerData }) {
             <Image avatar src={profilePicUrl} />
             {name}
           </h4>
+        </Grid.Column>
+
+        <Grid.Column floated="right" width={2}>
+          <Icon
+            floated="right"
+            name="video camera"
+            color="teal"
+            size="large"
+            style={{
+              position: "absolute",
+              top: "50%",
+              right: "1rem",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+            }}
+          />
         </Grid.Column>
       </Grid>
     </Segment>

@@ -27,6 +27,9 @@ function Notifications({ notifications, errorLoading, user, userFollowStats }) {
 
     notificationRead();
   }, []);
+  useEffect(() => {
+    document.title = "Thông Báo";
+  }, []);
 
   return (
     <>

@@ -15,6 +15,11 @@ const loadMessages = async (userId, messagesWith) => {
       return { error: "Không tìm thấy cuộc trò chuyện !" };
     }
 
+    if (user.unreadMessage) {
+      user.unreadMessage = false;
+      await user.save();
+    }
+
     return { chat };
   } catch (error) {
     console.log(error);
@@ -65,6 +70,11 @@ const sendMsg = async (userId, msgSendToUserId, msg) => {
       const newChat = { messagesWith: userId, messages: [newMsg] };
       msgSendToUser.chats.unshift(newChat);
       await msgSendToUser.save();
+    }
+
+    if (user.unreadMessage) {
+      user.unreadMessage = false;
+      await user.save();
     }
 
     return { newMsg };

@@ -21,107 +21,108 @@ function ProfileMenuTabs({
   return (
     <>
       <style>{mediaStyles}</style>
+      <MediaContextProvider>
+        <Media greaterThanOrEqual="mobile">
+          <Menu pointing secondary>
+            <Menu.Item
+              active={activeItem === "profile"}
+              onClick={() => handleItemClick("profile")}
+            >
+              Trang cá nhân
+            </Menu.Item>
 
-      <Media greaterThanOrEqual="mobile">
-        <Menu pointing secondary>
-          <Menu.Item
-            active={activeItem === "profile"}
-            onClick={() => handleItemClick("profile")}
-          >
-            Trang cá nhân
-          </Menu.Item>
+            <Menu.Item
+              active={activeItem === "followers"}
+              onClick={() => handleItemClick("followers")}
+            >
+              {followersLength} theo dõi
+            </Menu.Item>
 
-          <Menu.Item
-            active={activeItem === "followers"}
-            onClick={() => handleItemClick("followers")}
-          >
-            {followersLength} theo dõi
-          </Menu.Item>
+            {ownAccount ? (
+              <>
+                <Menu.Item
+                  active={activeItem === "following"}
+                  onClick={() => handleItemClick("following")}
+                >
+                  Đang theo dõi{" "}
+                  {loggedUserFollowStats.following.length > 0
+                    ? loggedUserFollowStats.following.length
+                    : 0}
+                </Menu.Item>
 
-          {ownAccount ? (
-            <>
+                <Menu.Item
+                  active={activeItem === "updateProfile"}
+                  onClick={() => handleItemClick("updateProfile")}
+                >
+                  Cập nhật
+                </Menu.Item>
+
+                <Menu.Item
+                  active={activeItem === "settings"}
+                  onClick={() => handleItemClick("settings")}
+                >
+                  Cài đặt
+                </Menu.Item>
+              </>
+            ) : (
               <Menu.Item
                 active={activeItem === "following"}
                 onClick={() => handleItemClick("following")}
               >
-                Đang theo dõi{" "}
-                {loggedUserFollowStats.following.length > 0
-                  ? loggedUserFollowStats.following.length
-                  : 0}
+                Đang theo dõi {followingLength}
               </Menu.Item>
+            )}
+          </Menu>
+        </Media>
 
-              <Menu.Item
-                active={activeItem === "updateProfile"}
-                onClick={() => handleItemClick("updateProfile")}
-              >
-                Cập nhật
-              </Menu.Item>
+        <Media between={["zero", "mobile"]}>
+          <Menu pointing secondary>
+            <Menu.Item
+              active={activeItem === "profile"}
+              onClick={() => handleItemClick("profile")}
+            >
+              Trang cá nhân
+            </Menu.Item>
 
-              <Menu.Item
-                active={activeItem === "settings"}
-                onClick={() => handleItemClick("settings")}
-              >
-                Cài đặt
-              </Menu.Item>
-            </>
-          ) : (
+            <Menu.Item
+              active={activeItem === "followers"}
+              onClick={() => handleItemClick("followers")}
+            >
+              {followersLength} theo dõi
+            </Menu.Item>
+
             <Menu.Item
               active={activeItem === "following"}
               onClick={() => handleItemClick("following")}
             >
-              Đang theo dõi {followingLength}
+              Đang theo dõi{" "}
+              {loggedUserFollowStats.following.length > 0
+                ? loggedUserFollowStats.following.length
+                : 0}
             </Menu.Item>
+          </Menu>
+
+          {ownAccount && (
+            <>
+              <Menu pointing secondary>
+                <Menu.Item
+                  active={activeItem === "updateProfile"}
+                  onClick={() => handleItemClick("updateProfile")}
+                >
+                  Cập nhật
+                </Menu.Item>
+
+                <Menu.Item
+                  active={activeItem === "settings"}
+                  onClick={() => handleItemClick("settings")}
+                >
+                  Cài đặt
+                </Menu.Item>
+              </Menu>
+            </>
           )}
-        </Menu>
-      </Media>
-
-      <Media between={["zero", "mobile"]}>
-        <Menu pointing secondary>
-          <Menu.Item
-            active={activeItem === "profile"}
-            onClick={() => handleItemClick("profile")}
-          >
-            Trang cá nhân
-          </Menu.Item>
-
-          <Menu.Item
-            active={activeItem === "followers"}
-            onClick={() => handleItemClick("followers")}
-          >
-            {followersLength} theo dõi
-          </Menu.Item>
-
-          <Menu.Item
-            active={activeItem === "following"}
-            onClick={() => handleItemClick("following")}
-          >
-            Đang theo dõi{" "}
-            {loggedUserFollowStats.following.length > 0
-              ? loggedUserFollowStats.following.length
-              : 0}
-          </Menu.Item>
-        </Menu>
-
-        {ownAccount && (
-          <>
-            <Menu pointing secondary>
-              <Menu.Item
-                active={activeItem === "updateProfile"}
-                onClick={() => handleItemClick("updateProfile")}
-              >
-                Cập nhật
-              </Menu.Item>
-
-              <Menu.Item
-                active={activeItem === "settings"}
-                onClick={() => handleItemClick("settings")}
-              >
-                Cài đặt
-              </Menu.Item>
-            </Menu>
-          </>
-        )}
-      </Media>
+        </Media>
+      </MediaContextProvider>
     </>
   );
 }

@@ -34,9 +34,9 @@ function Suggested() {
         <Spinner />
       ) : (
         suggested.length > 0 &&
-        suggested.map((user) => {
-          return (
-            <>
+        suggested.map(
+          (user, i) =>
+            i < 10 && (
               <List key={user._id} divided verticalAlign="middle">
                 <List.Item>
                   <Image avatar src={user.profilePicUrl} />
@@ -45,9 +45,8 @@ function Suggested() {
                   </List.Content>
                 </List.Item>
               </List>
-            </>
-          );
-        })
+            )
+        )
       )}
     </>
   );

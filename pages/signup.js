@@ -59,6 +59,9 @@ function Signup() {
     );
     isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
   }, [user]);
+  useEffect(() => {
+    document.title = "Đăng Ký";
+  }, []);
 
   const checkUsername = async () => {
     setUsernameLoading(true);

@@ -11,7 +11,9 @@ module.exports.suggested = async (req, res) => {
     //   user: userId,
     // }).populate("following.user");
 
-    const arr1 = users.filter((val) => val._id.toString() !== userId);
+    const arr1 = users.filter(
+      (val) => val._id.toString() !== userId && val.username !== "admin"
+    );
 
     // if (followingUser.length > 0) {
     //   const flw = followingUser.following.map((val) => val.user._id.toString());

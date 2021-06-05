@@ -22,7 +22,9 @@ module.exports.getChats = async (req, res) => {
       }));
     }
 
-    return res.json(chatsToBeSent);
+    return res.json(
+      chatsToBeSent.sort((a, b) => new Date(b.date) - new Date(a.date))
+    );
   } catch (error) {
     console.error(error);
     return res.status(500).send("Lỗi Server !");
