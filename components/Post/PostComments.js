@@ -10,7 +10,10 @@ function PostComments({ comment, user, setComments, postId }) {
     <>
       <Comment.Group>
         <Comment>
-          <Comment.Avatar src={comment.user.profilePicUrl} />
+          <Comment.Avatar
+            src={comment.user.profilePicUrl}
+            style={{ width: "2.5rem", height: "2.5rem" }}
+          />
           <Comment.Content
             style={{
               backgroundColor: "#F0F2F5",

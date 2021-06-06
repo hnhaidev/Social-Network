@@ -41,7 +41,7 @@ function Messages({ chatsData, user }) {
     }, 5000);
   }, []);
 
-  // Kết nối useEffect
+  // tạo socket Kết nối
   useEffect(() => {
     if (!socket.current) {
       socket.current = io(baseUrl);
@@ -69,7 +69,7 @@ function Messages({ chatsData, user }) {
     };
   }, []);
 
-  // Tải tin nhắn useEffect
+  // Tải tin nhắn
   useEffect(() => {
     const loadMessages = () => {
       socket.current.emit("loadMessages", {
@@ -244,7 +244,7 @@ function Messages({ chatsData, user }) {
                 <Comment.Group size="big">
                   <Segment
                     raised
-                    style={{ overflow: "auto", maxHeight: "32rem" }}
+                    style={{ overflow: "auto", maxHeight: "40rem" }}
                   >
                     {chats.map((chat, i) => (
                       <Chat

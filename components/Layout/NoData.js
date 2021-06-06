@@ -58,3 +58,11 @@ export const NoPosts = () => (
 export const NoProfile = () => (
   <Message info icon="meh" header="Hey!" content="Không tìm thấy hồ sơ." />
 );
+
+export const NoNotifications = () => (
+  <Message content="Không có thông báo nào !" icon="smile" info />
+);
+
+export const NoPostFound = () => (
+  <Message info icon="meh" header="Hey!" content="Không tìm thấy bài đăng !" />
+);

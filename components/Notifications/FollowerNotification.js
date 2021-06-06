@@ -19,7 +19,14 @@ function FollowerNotification({
   return (
     <>
       <Feed.Event>
-        <Feed.Label image={notification.user.profilePicUrl} />
+        <Feed.Label
+          image={notification.user.profilePicUrl}
+          style={{
+            width: "2.5rem",
+            height: "2.5rem",
+            borderRadius: "50%",
+          }}
+        />
         <Feed.Content style={{ position: "relative" }}>
           <Feed.Summary>
             <>

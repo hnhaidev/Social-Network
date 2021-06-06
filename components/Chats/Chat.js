@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, Comment, Icon, List } from "semantic-ui-react";
+import { Divider, Comment, Icon, List, Image } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import calculateTime from "../../utils/calculateTime";
 
@@ -23,7 +23,11 @@ function Chat({ chat, connectedUsers, deleteChat }) {
           }
         >
           <Comment>
-            <Comment.Avatar src={chat.profilePicUrl} />
+            <Image
+              avatar
+              src={chat.profilePicUrl}
+              style={{ borderRadius: "50%", width: "2.5em", height: "2.5em" }}
+            />
             <Comment.Content>
               <Comment.Author as="a">
                 {chat.name}{" "}

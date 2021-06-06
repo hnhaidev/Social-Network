@@ -12,7 +12,7 @@ const HeadTags = () => (
       <link rel="stylesheet" type="text/css" href="/styles.css" />
       <link rel="stylesheet" type="text/css" href="/nprogress.css" />
 
-      <title>HNH Network</title>
+      <title>UTC2 Network</title>
     </Head>
   </>
 );

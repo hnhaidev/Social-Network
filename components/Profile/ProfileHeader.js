@@ -119,6 +119,7 @@ function ProfileHeader({
                 avatar
                 src={profile.user.profilePicUrl}
                 circular
+                style={{ width: "11rem", height: "11rem" }}
               />
             </Grid.Row>
             <br />

@@ -36,7 +36,7 @@ module.exports.postAuth = async (req, res) => {
     );
 
     if (!user) {
-      return res.status(401).send("Tài khoản hoặc mật khẩu không đúng !");
+      return res.status(401).send("Email chưa được đăng ký tài khoản !");
     }
 
     const isPassword = await bcrypt.compare(password, user.password);

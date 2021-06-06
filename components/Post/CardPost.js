@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Card,
   Icon,
   Image,
   Divider,
-  Segment,
   Button,
   Popup,
   Header,
   Modal,
 } from "semantic-ui-react";
+import io from "socket.io-client";
+import baseUrl from "../../utils/baseUrl";
 import PostComments from "./PostComments";
 import CommentInputField from "./CommentInputField";
 import calculateTime from "../../utils/calculateTime";
@@ -19,8 +20,9 @@ import LikesList from "./LikesList";
 import ImageModal from "./ImageModal";
 import NoImageModal from "./NoImageModal";
 
-function CardPost({ post, user, setPosts, setShowToastr, socket }) {
+function CardPost({ post, user, setPosts, setShowToastr }) {
   const [likes, setLikes] = useState(post.likes);
+  const socket = useRef();
 
   const isLiked =
     likes.length > 0 &&
@@ -41,6 +43,12 @@ function CardPost({ post, user, setPosts, setShowToastr, socket }) {
     comments,
     setComments,
   });
+
+  useEffect(() => {
+    if (!socket.current) {
+      socket.current = io(baseUrl);
+    }
+  }, []);
 
   return (
     <>
