@@ -15,9 +15,13 @@ function Notifications({ notifications, userFollowStats }) {
   useEffect(() => {
     const notificationRead = async () => {
       try {
-        await axios.post(`${baseUrl}/api/notifications`, {
-          headers: { Authorization: cookie.get("token") },
-        });
+        await axios.post(
+          `${baseUrl}/api/notifications`,
+          {},
+          {
+            headers: { Authorization: cookie.get("token") },
+          }
+        );
       } catch (error) {
         console.log(error);
       }
