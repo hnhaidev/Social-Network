@@ -111,7 +111,7 @@ function Messages({ chatsData, user }) {
     }
   };
 
-  // Xác nhận tin nhắn được gửi và nhận tin nhắn bằng useEffect
+  // Xác nhận tin nhắn được gửi và nhận tin nhắn
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msgSent", ({ newMsg }) => {

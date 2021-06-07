@@ -111,6 +111,10 @@ io.on("connection", (socket) => {
     }
   );
 
+  socket.on("sendNewMsgGlobal", (data) => {
+    io.sockets.emit("sendMsgGlobal", data);
+  });
+
   socket.on("disconnect", () => removeUser(socket.id));
 });
 

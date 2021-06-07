@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Form, Segment, Icon } from "semantic-ui-react";
+import { Picker } from "emoji-mart";
 
 function MessageInputField({ sendMsg }) {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPicker, setShowPicKer] = useState(false);
+
+  const handleEmojiSelect = (e) => {
+    setText((text) => (text += e.native));
+  };
 
   return (
     <div style={{ position: "sticky", bottom: "0" }}>
@@ -14,6 +20,7 @@ function MessageInputField({ sendMsg }) {
             e.preventDefault();
             sendMsg(text);
             setText("");
+            setShowPicKer(false);
           }}
         >
           <Form.Input
@@ -40,7 +47,15 @@ function MessageInputField({ sendMsg }) {
               transform: "translateY(-50%)",
               cursor: "pointer",
             }}
+            onClick={() => setShowPicKer(!showPicker)}
           />
+          {showPicker && (
+            <Picker
+              onSelect={handleEmojiSelect}
+              emojiSize={20}
+              style={{ position: "absolute", right: "2.5rem", bottom: "3rem" }}
+            />
+          )}
         </Form>
       </Segment>
     </div>

@@ -46,3 +46,7 @@ body {
 .avatar img {
   border-radius: 50% !important;
 }
+
+.emoji-mart-preview {
+  display: none;
+}

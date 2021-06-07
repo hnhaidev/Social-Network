@@ -8,6 +8,9 @@ import {
   Sticky,
   Ref,
   Segment,
+  Icon,
+  Popup,
+  Button,
 } from "semantic-ui-react";
 import nprogress from "nprogress";
 import Router, { useRouter } from "next/router";
@@ -52,6 +55,26 @@ function Layout({ children, user }) {
                         <Grid.Column floated="left" width={2}>
                           <Sticky context={contextRef}>
                             <SideMenu user={user} />
+                            <Popup
+                              content="Chat Global"
+                              position="top left"
+                              style={{ marginLeft: "2rem", marginBottom: "0" }}
+                              trigger={
+                                <Button
+                                  icon="facebook messenger"
+                                  style={{
+                                    position: "fixed",
+                                    bottom: "0",
+                                    left: "0",
+                                    fontSize: "2em",
+                                    background: "none",
+                                    color: "teal",
+                                  }}
+                                  as="a"
+                                  href="/messagesglobal"
+                                />
+                              }
+                            />
                           </Sticky>
                         </Grid.Column>
                         <Grid.Column width={10}>

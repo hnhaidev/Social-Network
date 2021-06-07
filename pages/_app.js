@@ -7,6 +7,7 @@ import Layout from "../components/Layout/Layout";
 import "react-toastify/dist/ReactToastify.css";
 import "semantic-ui-css/semantic.min.css";
 import "cropperjs/dist/cropper.css";
+import "emoji-mart/css/emoji-mart.css";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -19,6 +20,7 @@ class MyApp extends App {
       ctx.pathname === "/notifications" ||
       ctx.pathname === "/post/[postId]" ||
       ctx.pathname === "/messages" ||
+      ctx.pathname === "/messagesglobal" ||
       ctx.pathname === "/search";
 
     if (!token) {
