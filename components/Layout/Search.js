@@ -39,7 +39,7 @@ function SearchComponent() {
 
       setResults(res.data);
     } catch (error) {
-      alert("Lỗi khi tìm kiếm !");
+      // alert("Lỗi khi tìm kiếm !");
     }
 
     setLoading(false);

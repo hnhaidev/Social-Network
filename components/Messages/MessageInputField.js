@@ -18,9 +18,11 @@ function MessageInputField({ sendMsg }) {
           reply
           onSubmit={(e) => {
             e.preventDefault();
-            sendMsg(text);
-            setText("");
-            setShowPicKer(false);
+            if (text.trim().length > 0) {
+              sendMsg(text);
+              setText("");
+              setShowPicKer(false);
+            }
           }}
         >
           <Form.Input

@@ -4,7 +4,7 @@ import axios from "axios";
 import baseUrl from "../utils/baseUrl";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/router";
-import { Segment, Header, Divider, Comment, Grid } from "semantic-ui-react";
+import { Segment, Popup, Button, Comment, Grid } from "semantic-ui-react";
 import Chat from "../components/Chats/Chat";
 import MobileMenu from "../components/Chats/MobileMenu";
 import { NoMessages } from "../components/Layout/NoData";
@@ -235,6 +235,26 @@ function Messages({ chatsData, user }) {
   return (
     <>
       <Segment padded basic size="large" style={{ paddingTop: "0" }}>
+        <Popup
+          content="Kênh thế giới"
+          position="top left"
+          style={{ marginLeft: "2rem", marginBottom: "0" }}
+          trigger={
+            <Button
+              icon="facebook messenger"
+              style={{
+                position: "fixed",
+                bottom: "0",
+                left: "0",
+                fontSize: "2em",
+                background: "none",
+                color: "teal",
+              }}
+              as="a"
+              href="/messagesglobal"
+            />
+          }
+        />
         <MobileMenu chats={chats} setChats={setChats} />
 
         {chats.length > 0 ? (

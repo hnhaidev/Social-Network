@@ -25,7 +25,7 @@ function CommentInputField({ postId, user, setComments }) {
           color: "blue",
           icon: "edit",
           loading: loading,
-          disabled: text === "" || loading,
+          disabled: text.trim() === "" || loading,
         }}
       />
     </Form>

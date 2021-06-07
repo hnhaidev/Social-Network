@@ -246,7 +246,7 @@ function CreatePost({ user, setPosts }) {
               <Button
                 fluid
                 circular
-                disabled={newPost.text === "" || loading}
+                disabled={newPost.text.trim() === "" || loading}
                 content={<strong>Đăng</strong>}
                 style={{ backgroundColor: "#1DA1F2", color: "white" }}
                 icon="send"

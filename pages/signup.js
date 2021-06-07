@@ -59,6 +59,7 @@ function Signup() {
     );
     isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
   }, [user]);
+
   useEffect(() => {
     document.title = "Đăng Ký";
   }, []);
@@ -90,7 +91,7 @@ function Signup() {
   };
 
   useEffect(() => {
-    username === "" ? setUsernameAvailable(false) : checkUsername();
+    username.trim() === "" ? setUsernameAvailable(false) : checkUsername();
   }, [username]);
 
   const handleSubmit = async (e) => {
@@ -212,7 +213,14 @@ function Signup() {
               content="Đăng ký"
               type="submit"
               color="orange"
-              disabled={submitDisabled || !usernameAvailable}
+              disabled={
+                name.trim() === "" ||
+                email.trim() === "" ||
+                password.trim() === "" ||
+                bio.trim() === "" ||
+                submitDisabled ||
+                !usernameAvailable
+              }
             />
           </Segment>
         </Form>

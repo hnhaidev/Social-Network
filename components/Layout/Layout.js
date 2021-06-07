@@ -56,7 +56,7 @@ function Layout({ children, user }) {
                           <Sticky context={contextRef}>
                             <SideMenu user={user} />
                             <Popup
-                              content="Chat Global"
+                              content="Kênh thế giới"
                               position="top left"
                               style={{ marginLeft: "2rem", marginBottom: "0" }}
                               trigger={
@@ -115,6 +115,26 @@ function Layout({ children, user }) {
                         <Grid.Column floated="left" width={4}>
                           <Sticky context={contextRef}>
                             <SideMenu user={user} />
+                            <Popup
+                              content="Kênh thế giới"
+                              position="top left"
+                              style={{ marginLeft: "2rem", marginBottom: "0" }}
+                              trigger={
+                                <Button
+                                  icon="facebook messenger"
+                                  style={{
+                                    position: "fixed",
+                                    bottom: "0",
+                                    left: "0",
+                                    fontSize: "2em",
+                                    background: "none",
+                                    color: "teal",
+                                  }}
+                                  as="a"
+                                  href="/messagesglobal"
+                                />
+                              }
+                            />
                           </Sticky>
                         </Grid.Column>
 
@@ -131,8 +151,8 @@ function Layout({ children, user }) {
                       </>
                     ) : (
                       <>
-                        <Grid.Column floated="left" width={1} />
-                        <Grid.Column width={15}>{children}</Grid.Column>
+                        <Grid.Column floated="left" width={1}></Grid.Column>
+                        <Grid.Column width={15}>{children} </Grid.Column>
                       </>
                     )}
                   </Grid>

@@ -40,7 +40,7 @@ function Messagesglobal(user) {
   return (
     <>
       <Segment
-        content="Chat Global"
+        content="Kênh thế giới"
         style={{
           marginBottom: "0",
           marginTop: "1rem",

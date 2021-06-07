@@ -37,7 +37,7 @@ function MobileMenu({ chats, setChats }) {
 
       setResults(res.data);
     } catch (error) {
-      alert("Lỗi khi đang tìm kiếm !");
+      // alert("Lỗi khi đang tìm kiếm !");
     }
     setLoading(false);
   };

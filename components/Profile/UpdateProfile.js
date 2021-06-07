@@ -26,7 +26,6 @@ function UpdateProfile({ Profile }) {
   const inputRef = useRef();
   const [media, setMedia] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
-  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -37,10 +36,6 @@ function UpdateProfile({ Profile }) {
     }
     setProfile((prev) => ({ ...prev, [name]: value }));
   };
-  useEffect(() => {
-    const isUser = Object.values({ name, bio }).every((item) => Boolean(item));
-    isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
-  }, [profile]);
 
   return (
     <>
@@ -114,7 +109,7 @@ function UpdateProfile({ Profile }) {
         <Button
           color="blue"
           icon="pencil alternate"
-          disabled={submitDisabled || loading}
+          disabled={name.trim() === "" || bio.trim() === "" || loading}
           content="Lưu"
           type="submit"
         />
