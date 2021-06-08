@@ -8,7 +8,7 @@ const {
   removeFollowerNotification,
 } = require("../utilsServer/notificationActions");
 
-// GET PROFILE INFO
+// lấy ra thông tin user
 module.exports.getProfile = async (req, res) => {
   try {
     const { username } = req.params;
@@ -43,7 +43,7 @@ module.exports.getProfile = async (req, res) => {
   }
 };
 
-// GET POSTS OF USER
+// lấy những bài viết của user
 module.exports.getPostOfUser = async (req, res) => {
   try {
     const { username } = req.params;
@@ -65,7 +65,7 @@ module.exports.getPostOfUser = async (req, res) => {
   }
 };
 
-// GET FOLLOWERS OF USER
+// lấy những người theo dõi user
 module.exports.getFollowersOfUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -81,7 +81,7 @@ module.exports.getFollowersOfUser = async (req, res) => {
   }
 };
 
-// GET FOLLOWING OF USER
+// lấy những người user đang theo dõi
 module.exports.getFollowingOfUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -97,7 +97,7 @@ module.exports.getFollowingOfUser = async (req, res) => {
   }
 };
 
-// FOLLOW A USER
+// Theo dõi user
 module.exports.postFollowAUser = async (req, res) => {
   try {
     const { userId } = req;
@@ -135,7 +135,7 @@ module.exports.postFollowAUser = async (req, res) => {
   }
 };
 
-// UNFOLLOW A USER
+// bỏ theo dõi user
 module.exports.putFollowAUser = async (req, res) => {
   try {
     const { userId } = req;
@@ -186,7 +186,7 @@ module.exports.putFollowAUser = async (req, res) => {
   }
 };
 
-// UPDATE PROFILE
+// sửa trang cá nhân
 module.exports.postUpdateProfile = async (req, res) => {
   try {
     const { userId } = req;
@@ -234,7 +234,7 @@ module.exports.postUpdateProfile = async (req, res) => {
   }
 };
 
-// UPDATE PASSWORD
+// cập nhật mật khẩu
 module.exports.postUpdatePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -261,7 +261,7 @@ module.exports.postUpdatePassword = async (req, res) => {
   }
 };
 
-// UPDATE MESSAGE POPUP SETTINGS
+// cập nhật đóng mở thông báo mess
 module.exports.postUpdateMessagePopup = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);

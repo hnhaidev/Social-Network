@@ -10,9 +10,11 @@ export const HeaderMessage = () => {
     <Message
       color="teal"
       attached
+      size="big"
       header={signupRoute ? "Đăng Ký" : "Đăng Nhập"}
-      icon={signupRoute ? "add user" : "user circle outline"}
-      content={signupRoute ? "Tạo tài khoản mới" : "Đăng nhập bằng Email"}
+      // icon={signupRoute ? "add user" : "user circle outline"}
+      // content={signupRoute ? "Tạo tài khoản mới" : "Đăng nhập bằng Email"}
+      style={{ textAlign: "center" }}
     />
   );
 };

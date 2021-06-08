@@ -8,7 +8,6 @@ import {
   Sticky,
   Ref,
   Segment,
-  Icon,
   Popup,
   Button,
 } from "semantic-ui-react";
@@ -205,8 +204,8 @@ function Layout({ children, user }) {
             height: "250vh",
           }}
         >
-          <Navbar />
-          <Container text style={{ paddingTop: "1rem" }}>
+          {/* <Navbar /> */}
+          <Container text style={{ paddingTop: "5rem" }}>
             {children}
           </Container>
         </div>

@@ -40,7 +40,11 @@ function Suggested() {
               <List key={user._id} divided verticalAlign="middle">
                 <List.Item>
                   <Image avatar src={user.profilePicUrl} />
-                  <List.Content as="a" href={`/${user.username}`}>
+                  <List.Content
+                    as="a"
+                    href={`/${user.username}`}
+                    style={{ color: "#000" }}
+                  >
                     {user.name}
                   </List.Content>
                 </List.Item>

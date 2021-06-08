@@ -21,21 +21,23 @@
 }
 .ownBubble {
   min-width: 60px;
-  max-width: 700px;
   padding: 6px 12px;
   margin: 6px 8px;
   background-color: #5b5377;
   border-radius: 16px 16px 0 16px;
   border: 1px solid #443f56;
+  word-wrap: break-word;
+  max-width: 15rem;
 }
 .otherBubble {
   min-width: 60px;
-  max-width: 700px;
-  padding: 5px 10px;
+  padding: 6px 12px;
   margin: 6px 8px;
   background-color: #6c8ea4;
   border-radius: 16px 16px 16px 0;
   border: 1px solid #54788e;
+  word-wrap: break-word;
+  max-width: 15rem;
 }
 .own {
   align-self: flex-end;

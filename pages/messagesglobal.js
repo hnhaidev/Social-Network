@@ -47,6 +47,7 @@ function Messagesglobal(user) {
           color: "teal",
           fontSize: "1em",
           fontWeight: "700",
+          textAlign: "center",
         }}
       />
       <Segment

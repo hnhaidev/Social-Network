@@ -9,7 +9,7 @@ const {
   removeCommentNotification,
 } = require("../utilsServer/notificationActions");
 
-// CREATE A POST
+// tạo bài viết
 module.exports.createPost = async (req, res) => {
   const { text, location, picUrl } = req.body;
 
@@ -35,7 +35,7 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
-// GET ALL POSTS
+// lấy ra tất cả các bài viết
 module.exports.getPost = async (req, res) => {
   const { pageNumber } = req.query;
 
@@ -112,7 +112,7 @@ module.exports.getPost = async (req, res) => {
   }
 };
 
-// GET POST BY ID
+// lấy ra bài viết theo id
 module.exports.getPostById = async (req, res) => {
   try {
     const post = await PostModel.findById(req.params.postId)
@@ -130,7 +130,7 @@ module.exports.getPostById = async (req, res) => {
   }
 };
 
-// DELETE POST
+// xóa bài viết
 module.exports.deletePost = async (req, res) => {
   try {
     const { userId } = req;
@@ -161,7 +161,7 @@ module.exports.deletePost = async (req, res) => {
   }
 };
 
-// LIKE A POST
+// like bài viết
 module.exports.likePost = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -193,7 +193,7 @@ module.exports.likePost = async (req, res) => {
   }
 };
 
-// UNLIKE A POST
+// UNLIKE bài viết
 module.exports.unlikePost = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -230,7 +230,7 @@ module.exports.unlikePost = async (req, res) => {
   }
 };
 
-// GET ALL LIKES OF A POST
+// lấy ra tất cả các like của một bài viết
 module.exports.getAllLikePost = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -247,7 +247,7 @@ module.exports.getAllLikePost = async (req, res) => {
   }
 };
 
-// CREATE A COMMENT
+// tạo cmt
 module.exports.createComment = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -289,7 +289,7 @@ module.exports.createComment = async (req, res) => {
   }
 };
 
-// DELETE A COMMENT
+// xóa cmt
 module.exports.deleteComment = async (req, res) => {
   try {
     const { postId, commentId } = req.params;

@@ -13,31 +13,31 @@ const {
 } = require("../controllers/posts.controller");
 const authMiddleware = require("../middleware/authMiddleware");
 
-// CREATE A POST
+// tạo bài viết
 router.post("/", authMiddleware, createPost);
 
-// GET ALL POSTS
+// lấy ra tất cả các bài viết
 router.get("/", authMiddleware, getPost);
 
-// GET POST BY ID
+// lấy ra bài viết theo id
 router.get("/:postId", authMiddleware, getPostById);
 
-// DELETE POST
+// xóa bài viết
 router.delete("/:postId", authMiddleware, deletePost);
 
-// LIKE A POST
+// like bài viết
 router.post("/like/:postId", authMiddleware, likePost);
 
-// UNLIKE A POST
+// UNLIKE bài viết
 router.put("/unlike/:postId", authMiddleware, unlikePost);
 
-// GET ALL LIKES OF A POST
+// lấy ra tất cả các like của một bài viết
 router.get("/like/:postId", authMiddleware, getAllLikePost);
 
-// CREATE A COMMENT
+// tạo cmt
 router.post("/comment/:postId", authMiddleware, createComment);
 
-// DELETE A COMMENT
+// xóa cmt
 router.delete("/:postId/:commentId", authMiddleware, deleteComment);
 
 module.exports = router;

@@ -10,13 +10,18 @@ const ChatSchema = new Schema({
       messages: [
         {
           msg: { type: String, required: true },
+          type: { type: String },
           sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
-          receiver: { type: Schema.Types.ObjectId, ref: "User", required: true },
-          date: { type: Date }
-        }
-      ]
-    }
-  ]
+          receiver: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+          },
+          date: { type: Date },
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model("Chat", ChatSchema);

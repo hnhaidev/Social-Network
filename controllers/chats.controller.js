@@ -1,7 +1,7 @@
 const ChatModel = require("../models/ChatModel");
 const UserModel = require("../models/UserModel");
 
-// GET ALL CHATS
+// xuất tất cả các chats hiện có
 module.exports.getChats = async (req, res) => {
   try {
     const { userId } = req;
@@ -31,7 +31,7 @@ module.exports.getChats = async (req, res) => {
   }
 };
 
-// GET USER INFO
+// lấy ra user theo id
 module.exports.getUserInfo = async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userToFindId);
@@ -47,7 +47,7 @@ module.exports.getUserInfo = async (req, res) => {
   }
 };
 
-// Delete a chat
+// xóa chat
 module.exports.deleteChat = async (req, res) => {
   try {
     const { userId } = req;

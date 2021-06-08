@@ -5,8 +5,8 @@ import Cropper from "react-cropper";
 function CropImageModal({
   mediaPreview,
   setMedia,
-  showCropImageModal,
-  setShowCropImageModal,
+  showCropImage,
+  setShowCropImage,
 }) {
   const [cropper, setCropper] = useState();
 
@@ -16,7 +16,7 @@ function CropImageModal({
       cropper.destroy();
     }
 
-    setShowCropImageModal(false);
+    setShowCropImage(false);
   };
 
   useEffect(() => {
@@ -34,8 +34,8 @@ function CropImageModal({
       <Modal
         closeOnDimmerClick={false}
         size="large"
-        onClose={() => setShowCropImageModal(false)}
-        open={showCropImageModal}
+        onClose={() => setShowCropImage(false)}
+        open={showCropImage}
       >
         <Modal.Header content="Cắt hình ảnh trước khi tải lên" />
 
@@ -116,7 +116,7 @@ function CropImageModal({
             negative
             content="Hủy"
             icon="cancel"
-            onClick={() => setShowCropImageModal(false)}
+            onClick={() => setShowCropImage(false)}
           />
 
           <Button

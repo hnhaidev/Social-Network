@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react";
 import uploadPic from "../../utils/uploadPicToCloudinary";
 import { submitNewPost } from "../../utils/postActions";
+import CropImageModal from "./CropImageModal";
 
 function CreatePost({ user, setPosts }) {
   const [newPost, setNewPost] = useState({ text: "", location: "" });
@@ -26,6 +27,8 @@ function CreatePost({ user, setPosts }) {
   const [mediaPreview, setMediaPreview] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
+
+  const [showCropImage, setShowCropImage] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -71,7 +74,9 @@ function CreatePost({ user, setPosts }) {
     );
 
     setMedia(null);
-    setMediaPreview(null);
+    mediaPreview && URL.revokeObjectURL(mediaPreview);
+    setTimeout(() => setMediaPreview(null), 3000);
+
     setLoading(false);
     setShowModal(false);
     setShowMap(false);
@@ -79,6 +84,14 @@ function CreatePost({ user, setPosts }) {
 
   return (
     <>
+      {showCropImage && (
+        <CropImageModal
+          mediaPreview={mediaPreview}
+          setMedia={setMedia}
+          showCropImage={showCropImage}
+          setShowCropImage={setShowCropImage}
+        />
+      )}
       <Segment>
         <Grid>
           <Grid.Column
@@ -108,6 +121,7 @@ function CreatePost({ user, setPosts }) {
           </Grid.Column>
         </Grid>
       </Segment>
+
       {showModal && (
         <Modal
           open={showModal}
@@ -180,39 +194,50 @@ function CreatePost({ user, setPosts }) {
               </Form.Group>
 
               {mediaPreview && (
-                <div
-                  onClick={() => inputRef.current.click()}
-                  style={addStyles()}
-                  onDrag={(e) => {
-                    e.preventDefault();
-                    setHighlighted(true);
-                  }}
-                  onDragLeave={(e) => {
-                    e.preventDefault();
-                    setHighlighted(false);
-                  }}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setHighlighted(true);
+                <>
+                  <div
+                    onClick={() => inputRef.current.click()}
+                    style={addStyles()}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      setHighlighted(true);
+                    }}
+                    onDragLeave={(e) => {
+                      e.preventDefault();
+                      setHighlighted(false);
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setHighlighted(true);
 
-                    const droppedFile = Array.from(e.dataTransfer.files);
+                      const droppedFile = Array.from(e.dataTransfer.files);
 
-                    setMedia(droppedFile[0]);
-                    setMediaPreview(URL.createObjectURL(droppedFile[0]));
-                  }}
-                >
-                  {media !== null && (
-                    <div>
-                      <Image
-                        style={{ height: "auto", width: "100%" }}
-                        src={mediaPreview}
-                        alt="PostImage"
-                        centered
-                        size="medium"
-                      />
-                    </div>
-                  )}
-                </div>
+                      setMedia(droppedFile[0]);
+                      setMediaPreview(URL.createObjectURL(droppedFile[0]));
+                    }}
+                  >
+                    {media !== null && (
+                      <div>
+                        <Image
+                          style={{ height: "auto", width: "100%" }}
+                          src={mediaPreview}
+                          alt="PostImage"
+                          centered
+                          size="medium"
+                        />
+                      </div>
+                    )}
+                    <Divider hidden />
+                  </div>
+                  <Button
+                    icon="crop"
+                    type="button"
+                    primary
+                    circular
+                    onClick={() => setShowCropImage(true)}
+                    style={{ marginTop: "0.5rem", backgroundColor: "teal" }}
+                  />
+                </>
               )}
 
               <Segment>

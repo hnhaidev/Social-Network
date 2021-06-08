@@ -13,31 +13,31 @@ const {
 const router = express.Router();
 const authMiddleware = require("../middleware/authMiddleware");
 
-// GET PROFILE INFO
+// lấy ra thông tin user
 router.get("/:username", authMiddleware, getProfile);
 
-// GET POSTS OF USER
+// lấy những bài viết của user
 router.get(`/posts/:username`, authMiddleware, getPostOfUser);
 
-// GET FOLLOWERS OF USER
+// lấy những người theo dõi user
 router.get("/followers/:userId", authMiddleware, getFollowersOfUser);
 
-// GET FOLLOWING OF USER
+// lấy những người user đang theo dõi
 router.get("/following/:userId", authMiddleware, getFollowingOfUser);
 
-// FOLLOW A USER
+// Theo dõi user
 router.post("/follow/:userToFollowId", authMiddleware, postFollowAUser);
 
-// UNFOLLOW A USER
+// bỏ theo dõi user
 router.put("/unfollow/:userToUnfollowId", authMiddleware, putFollowAUser);
 
-// UPDATE PROFILE
+// sửa trang cá nhân
 router.post("/update", authMiddleware, postUpdateProfile);
 
-// UPDATE PASSWORD
+// cập nhật mật khẩu
 router.post("/settings/password", authMiddleware, postUpdatePassword);
 
-// UPDATE MESSAGE POPUP SETTINGS
+// cập nhật đóng mở thông báo mess
 router.post("/settings/messagePopup", authMiddleware, postUpdateMessagePopup);
 
 module.exports = router;

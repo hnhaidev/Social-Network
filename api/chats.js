@@ -7,13 +7,13 @@ const {
   deleteChat,
 } = require("../controllers/chats.controller");
 
-// GET ALL CHATS
+// xuất tất cả các chats hiện có
 router.get("/", authMiddleware, getChats);
 
-// GET USER INFO
+// lấy ra user theo id
 router.get("/user/:userToFindId", authMiddleware, getUserInfo);
 
-// Delete a chat
+// xóa chat
 router.delete(`/:messagesWith`, authMiddleware, deleteChat);
 
 module.exports = router;
