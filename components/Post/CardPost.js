@@ -69,7 +69,7 @@ function CardPost({ post, user, setPosts, setShowToastr }) {
         </Modal>
       )}
 
-      <Card color="teal" fluid>
+      <Card color="teal" fluid style={{ border: "1px solid rgba(0,0,0,.1" }}>
         <Card.Content>
           <Image floated="left" src={post.user.profilePicUrl} avatar circular />
 
